@@ -6,11 +6,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/User/git/repository/OOPII_21933_219151/OpenData/jars/commons-lang-2.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/User/git/repository/OOPII_21933_219151/OpenData/jars/commons-lang-2.6-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/User/git/repository/OOPII_21933_219151/OpenData/jars/commons-lang-2.6-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/User/git/repository/OOPII_21933_219151/OpenData/jars/jackson-annotations-2.9.8.jar"/>
-	<classpathentry kind="lib" path="C:/Users/User/git/repository/OOPII_21933_219151/OpenData/jars/jackson-core-2.9.8.jar"/>
-	<classpathentry kind="lib" path="C:/Users/User/git/repository/OOPII_21933_219151/OpenData/jars/jackson-databind-2.9.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/stav/IdeaProjects/OOPII_21933_219151/OpenData/jars/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/stav/IdeaProjects/OOPII_21933_219151/OpenData/jars/commons-lang-2.6-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/stav/IdeaProjects/OOPII_21933_219151/OpenData/jars/commons-lang-2.6-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/stav/IdeaProjects/OOPII_21933_219151/OpenData/jars/jackson-annotations-2.9.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/stav/IdeaProjects/OOPII_21933_219151/OpenData/jars/jackson-core-2.9.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/stav/IdeaProjects/OOPII_21933_219151/OpenData/jars/jackson-databind-2.9.8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

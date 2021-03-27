@@ -11,10 +11,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import weather.OpenWeatherMap;
 
 
-public class Traveller {
+public abstract class Traveller {
 	
 	private String city;
-	private int[] favorite_terms_vector=new int[10];
+	private int[] rating_vector=new int[11];
 	private double[] currently_geodestic_vector=new double[2];
 	private String country;
 	
@@ -37,9 +37,7 @@ public class Traveller {
 	
 	//κριτήρια που ενδιαφέρουνε τον traveller
 	public void FavoriteCityTerms() {
-	 
-		
-     String[] favorite_terms_vector_strings=new String[]{"sea==1","walls==8","ancient==7","mountain==10","bridge==8","museum==8","squeare==4","restaurant==7","view==10","forest==10"};
+	 // todo 
 	 //int[] favorite_terms_vector=new int[10];
 	 
 	  }
@@ -69,20 +67,23 @@ public class Traveller {
 		//System.out.println("lat:"+currently_geodestic_vector[0]+"\tlon"+currently_geodestic_vector[1]);
 	}
 	*/
+	
+	public abstract int calculate_similarity();
+	
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
 		
-		Traveller trav1=new Traveller("athens", "gr");
-		trav1.CurrentlyCityLanLot();
-		System.out.println("lat: "+trav1.currently_geodestic_vector[0]+"\tlon: "+trav1.currently_geodestic_vector[1]);
+		//Traveller trav1=new Traveller("athens", "gr");
+		//trav1.CurrentlyCityLanLot();
+		//System.out.println("lat: "+trav1.currently_geodestic_vector[0]+"\tlon: "+trav1.currently_geodestic_vector[1]);
 	}
 	
 	
-	public int getFavTerms_vector(int index) {
-		return favorite_terms_vector[index];
+	public int getRating_vector(int index) {
+		return rating_vector[index];
 	}
 
-	public void setFavTerms_vector(int[] favorite_terms_vector) {
-		this.favorite_terms_vector = favorite_terms_vector;
+	public void setRating_vector(int[] rating_vector) {
+		this.rating_vector = rating_vector;
 	}
 
 	public double getCurGeodestic_vector(int index) {

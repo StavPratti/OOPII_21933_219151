@@ -2,22 +2,20 @@ package totravel;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
+//import java.net.URL;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 
-import weather.OpenWeatherMap;
+//import weather.OpenWeatherMap;
 
 
 public abstract class Traveller {
 	
 	private String city;
-	private int[] rating_vector=new int[11];
-	private double[] currently_geodestic_vector=new double[2];
 	private String country;
-	
+	private double[] currently_geodestic_vector=new double[2];
 
 	public Traveller(String city,String country) {
 		this.city=city;	
@@ -37,38 +35,20 @@ public abstract class Traveller {
 	
 	//κριτήρια που ενδιαφέρουνε τον traveller
 	public void FavoriteCityTerms() {
-	 // todo 
-	 //int[] favorite_terms_vector=new int[10];
-	 
+	  int[] rating_vector=new int [] {2, 5, 7, 3, 8, 9, 3, 6, 9, 4};
 	  }
 	
 	
     //συντεταγμένες του traveller
-	public void CurrentlyCityLanLot() throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
-		ObjectMapper mapper2=new ObjectMapper();
-		//String country="it";
-		//double[] geodestic_vector=new double[2];
-		//city = "athens";
-		//country =  "gr";
-		String appid="c01b30fa264932378fe076eb38121dbc";
-		OpenWeatherMap weather_obj = mapper2.readValue(new URL("http://api.openweathermap.org/data/2.5/weather?q="+city+","+country+"&APPID="+appid+""), OpenWeatherMap.class);
-		currently_geodestic_vector[0]=weather_obj.getCoord().getLat();
-		currently_geodestic_vector[1]=weather_obj.getCoord().getLon();
-		//System.out.println("lat:"+geodestic_vector[0]+"\tlon"+geodestic_vector[1]);
-	}
 	
-	// ή πιο απλά:
-	/*public void CurrentlyCityLanLot() {
-		//double[] currently_geodestic_vector=new double[2];
-		city = "athens";
-		country =  "gr";
+	  public void CurrentlyCityLanLot() {
 		currently_geodestic_vector[0]=37.9795;
 		currently_geodestic_vector[1]=23.7162;
 		//System.out.println("lat:"+currently_geodestic_vector[0]+"\tlon"+currently_geodestic_vector[1]);
 	}
-	*/
+
 	
-	public abstract int calculate_similarity();
+	//public abstract int calculate_similarity();
 	
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
 		
@@ -77,16 +57,7 @@ public abstract class Traveller {
 		//System.out.println("lat: "+trav1.currently_geodestic_vector[0]+"\tlon: "+trav1.currently_geodestic_vector[1]);
 	}
 	
-	
-	public int getRating_vector(int index) {
-		return rating_vector[index];
-	}
-
-	public void setRating_vector(int[] rating_vector) {
-		this.rating_vector = rating_vector;
-	}
-
-	public double getCurGeodestic_vector(int index) {
+    public double getCurGeodestic_vector(int index) {
 		
 		return currently_geodestic_vector[index];
 	}

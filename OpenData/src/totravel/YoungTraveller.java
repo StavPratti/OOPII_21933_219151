@@ -5,11 +5,15 @@ import static moreinfo.DistanceCalculator2.*;
 
 public class YoungTraveller extends Traveller {
 
+	
+	
 	public YoungTraveller(String city, String country) {
 		super(city, country);
 		// TODO Auto-generated constructor stub
 	}
-	
+
+
+
 	public double similarity_terms_vector(City cit){
 		
 		int sum=0;

@@ -7,11 +7,17 @@ public class MiddleTraveller extends Traveller{
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public double calculate_similarity(City object) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+public double similarity_terms_vector(City cit){
+	return 0;
+		
+		
 
+}
 
+@Override
+double calculate_similarity(City object) {
+	double p=0.70;
+	// TODO Auto-generated method stub
+	return 0;
+}
 }

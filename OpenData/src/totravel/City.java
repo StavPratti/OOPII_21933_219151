@@ -47,14 +47,15 @@ public class City {
 	 
 	
     //φτιαχνει τον πίνακα geodestic_vector
-	public void CityLanLot() throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
+	public void CityLatLon() throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
 		ObjectMapper mapper2=new ObjectMapper();
-		//String country="it";
-		//double[] geodestic_vector=new double[2];
+		
 		String appid="c01b30fa264932378fe076eb38121dbc";
 		OpenWeatherMap weather_obj = mapper2.readValue(new URL("http://api.openweathermap.org/data/2.5/weather?q="+city+","+country+"&APPID="+appid+""), OpenWeatherMap.class);
 		geodestic_vector[0]=weather_obj.getCoord().getLat();
 		geodestic_vector[1]=weather_obj.getCoord().getLon();
+		//System.out.println(geodestic_vector[0]);
+		//System.out.println(geodestic_vector[1]);
 	}
 	
 	public int getTerms_vector(int index) {

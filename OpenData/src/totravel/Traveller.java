@@ -5,7 +5,7 @@ import java.net.MalformedURLException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-public abstract class Traveller {
+ public abstract class Traveller {
 	
 	private String city;
 	private String country;
@@ -14,7 +14,8 @@ public abstract class Traveller {
 
 	public Traveller(String city,String country) {
 		this.city=city;	
-		this.country=country;	
+		this.country=country;
+		
 	}
 	
 
@@ -43,7 +44,7 @@ public abstract class Traveller {
 	
 	
       //συντεταγμένες του traveller
-	  public void CurrentlyCityLanLot() {
+	  public void CurrentlyCityLatLon() {
 		currently_geodestic_vector[0]=37.9795;
 		currently_geodestic_vector[1]=23.7162;
 	}
@@ -54,7 +55,8 @@ public abstract class Traveller {
 
     protected double SimilarityGeodesticVector(double distance) {
     	int maxdist=15317;
-		return Math.log(2/(2-distance/maxdist));	
+    	
+		return (Math.log(2/(2-distance/maxdist)) / Math.log(2));	
     }
 	
 	
@@ -62,7 +64,7 @@ public abstract class Traveller {
 		return currently_geodestic_vector[index];
 	}
     
-    public double getRatingVector(int index) {	
+    public int getRatingVector(int index) {	
   		return rating_vector[index];
   	}
 

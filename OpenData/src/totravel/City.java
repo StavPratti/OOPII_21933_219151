@@ -12,11 +12,20 @@ import wikipedia.MediaWiki;
 
 public class City {
 
+
 	private String city;
 	private int[] terms_vector=new int[10];
 	private double[] geodestic_vector=new double[2];
 	private String country;
-	
+	protected static double similarityofthetrav;
+
+	public static double getSimilarityofthetrav() {
+		return similarityofthetrav;
+	}
+
+	public static void setSimilarityofthetrav(double similarityofthetrav) {
+		City.similarityofthetrav = similarityofthetrav;
+	}
 
 	public City(String city,String country) {
 		this.city=city;	
@@ -57,6 +66,8 @@ public class City {
 		//System.out.println(geodestic_vector[0]);
 		//System.out.println(geodestic_vector[1]);
 	}
+	
+	
 	
 	public int getTerms_vector(int index) {
 		return terms_vector[index];

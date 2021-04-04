@@ -4,23 +4,39 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
+
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
- public abstract class Traveller {
+ public abstract class Traveller implements Comparable<Traveller> {
 	
 	private String city;
 	private String country;
 	private double[] currently_geodestic_vector=new double[2];
 	private int[] rating_vector=new int [10];
+	protected double similarity;
+
+
+
 
 	public Traveller(String city,String country) {
+		this.similarity=0;
 		this.city=city;	
 		this.country=country;
-		this.rating_vector=new int[] {2,4,10,5,3,10,8,0,0,1};
+		this.rating_vector=new int[] {0,0,10,0,0,10,8,0,0,1};
 		this.currently_geodestic_vector=new double[] {37.9795,23.7162};
 	}
 	
+
+	public double getSimilarity() {
+		return similarity;
+	}
+
+
+	public void setSimilarity(double similarity) {
+		this.similarity = similarity;
+	}
+
 
 	/**Retrieves weather information, geotag (lan, lon) and a Wikipedia article for a given city.
 	* @param city The Wikipedia article and OpenWeatherMap city. 
@@ -75,10 +91,48 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 		}
 		return bestCity;
 	}
+	
+
+	
+	public ArrayList<City> CompareCities(ArrayList<City> cities,int integer) {
+		
+		for(int i=0;i<cities.size();i++) {
+			double simi=calculate_similarity(cities.get(i));
+		}
+	//   Arrays.sort(cities);///
+		return cities;
+	}
+	
+	
+	
+	
+	
+	
+    //freeticket
+    public static Traveller freeticket(ArrayList<Traveller> trav) throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
+    	Traveller Winner=trav.get(0);
+    	City city=new City("Rome","it");
+    	city.CityLatLon();
+    	city.CityTerms();
+    	for(int i=1;i<trav.size();i++) {
+    		if(trav.get(i).calculate_similarity(city)>Winner.calculate_similarity(city)) {
+    			Winner =trav.get(i);
+    		}
+    	}
+		return Winner;
+    }
     
-    
-    
-    
+
+
+
+
+
+	
+
+
+	public void setRating_vector(int[] rating_vector) {
+		this.rating_vector = rating_vector;
+	}
     public double getCurGeodestic_vector(int index) {
 		return currently_geodestic_vector[index];
 	}
@@ -107,6 +161,19 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
+
+	public int compareto(Traveller trav) {
+		if(this.similarity>trav.similarity) {
+			return 1;
+		}
+		if(this.similarity<trav.similarity) {
+			return -1;
+		}
+		return 0;
+	}
+
+
 	
 	
 	

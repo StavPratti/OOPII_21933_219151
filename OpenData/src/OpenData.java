@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 import totravel.City;
 import totravel.ElderTraveller;
+import totravel.Traveller;
+import static totravel.Traveller.*;
 import totravel.YoungTraveller;
 /**City description and weather information using OpenData with Jackson JSON processor.
 * @since 29-2-2020
@@ -25,8 +27,12 @@ public class OpenData {
 	    
 		
 		YoungTraveller tr=new YoungTraveller("Athens","gr");
-		City bestCity=tr.CompareCities(cities);
-		System.out.println(bestCity.getCity());
+		//City bestCity=tr.CompareCities(cities);
+		//ArrayList<City> city =tr.CompareCities(cities, 3);
+		//for(int i=2;i<4;i++) {
+		//	System.out.println(city.get(i));
+		//}
+		//System.out.println(bestCity.getCity());
 		//tr.CurrentlyCityLatLon();
 		//tr.FavoriteCityTerms();
 	//System.out.println(tr.calculate_similarity(city1)); //similarity athens-rome
@@ -36,10 +42,34 @@ public class OpenData {
 		
 		
 		//γερος ταξιδιώτης
-		ElderTraveller elder=new ElderTraveller("Athens","gr");
+		//ElderTraveller elder=new ElderTraveller("Athens","gr");
 		//elder.CurrentlyCityLatLon();
 		//elder.FavoriteCityTerms();
 //System.out.println(elder.calculate_similarity(city1)); //similarity athens-rome
+	
+		
+		//free ticket
+		YoungTraveller young1=new YoungTraveller("Athens","gr");
+		ElderTraveller elder1=new ElderTraveller("Athens","gr");
+		ArrayList<Traveller> travellers = new ArrayList<>(); 
+		travellers.add(elder1);
+		elder1.setRating_vector(new int[] {2,9,9,9,3,10,8,9,9,1});
+		travellers.add(young1);
+		System.out.println(freeticket(travellers));//διευθυνση μνημης
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 }

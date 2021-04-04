@@ -42,4 +42,18 @@ public class ElderTraveller extends Traveller {
 	
 	return sum_intersection/sum_union;
 	}
+
+
+
+
+	@Override
+	public int compareTo(Traveller trav) {
+		if(this.similarity>trav.similarity) {
+			return 1;
+		}
+		if(this.similarity<trav.similarity) {
+			return -1;
+		}
+		return 0;
+	}
 }

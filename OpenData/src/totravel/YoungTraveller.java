@@ -38,7 +38,35 @@ public class YoungTraveller extends Traveller {
 	public double calculate_similarity(City object) {
     	double p=0.95;	
 		double distance=distance(getCurGeodestic_vector(0),getCurGeodestic_vector(1),object.getGeodestic_vector(0),object.getGeodestic_vector(1),'M');
+		setSimilarity(p*similarity_terms_vector(object)+(1-p)*SimilarityGeodesticVector(distance));
+		
 		return p*similarity_terms_vector(object)+(1-p)*SimilarityGeodesticVector(distance);
 	}
 
+
+
+	
+
+
+	
+	@Override
+	public int compareTo(Traveller trav) {
+		
+			if(this.similarity>trav.similarity) {
+				return 1;
+			}
+			if(this.similarity<trav.similarity) {
+				return -1;
+			}
+			return 0;
+		
+
+		
+	}
+
+
 }
+	
+	
+
+

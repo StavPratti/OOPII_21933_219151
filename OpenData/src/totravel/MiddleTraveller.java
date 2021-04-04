@@ -20,4 +20,10 @@ double calculate_similarity(City object) {
 	// TODO Auto-generated method stub
 	return 0;
 }
+
+@Override
+public int compareTo(Traveller o) {
+	// TODO Auto-generated method stub
+	return 0;
+}
 }

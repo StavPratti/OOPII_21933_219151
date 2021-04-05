@@ -31,7 +31,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 	 * @throws JsonMappingException 
 	 * @throws JsonParseException */
 	
-	//κριτήρια που ενδιαφέρουνε τον traveller
+	//ΓªΓ±Γ©Γ΄ΓΓ±Γ©Γ΅ Γ°Γ―Γµ Γ¥Γ­Γ¤Γ©Γ΅Γ¶ΓΓ±Γ―ΓµΓ­Γ¥ Γ΄Γ―Γ­ traveller
 	/*public void FavoriteCityTerms() {
 	   rating_vector[0]= 2;
 	   rating_vector[1]=4;
@@ -46,7 +46,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 	  }*/
 	
 	
-      //συντεταγμένες του traveller
+      //Γ³ΓµΓ­Γ΄Γ¥Γ΄Γ΅Γ£Γ¬ΓΓ­Γ¥Γ² Γ΄Γ―Γµ traveller
 	/*  public void CurrentlyCityLatLon() {
 		currently_geodestic_vector[0]=37.9795;
 		currently_geodestic_vector[1]=23.7162;
@@ -66,9 +66,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 		double min=-1.2;
 		City bestCity = null;
 		for(int i=0;i<cities.size();i++) {
-			//cities.get(i).CityLatLon();//ωστε να υπολογιστει το lat,lon
-			//cities.get(i).CityTerms();//countwords για την πολη
-			double similarity=calculate_similarity(cities.get(i)); //υπολογισμος του σιμιλαριτι
+			//cities.get(i).CityLatLon();//ΓΉΓ³Γ΄Γ¥ Γ­Γ΅ ΓµΓ°Γ―Γ«Γ―Γ£Γ©Γ³Γ΄Γ¥Γ© Γ΄Γ― lat,lon
+			//cities.get(i).CityTerms();//countwords Γ£Γ©Γ΅ Γ΄Γ§Γ­ Γ°Γ―Γ«Γ§
+			double similarity=calculate_similarity(cities.get(i)); //ΓµΓ°Γ―Γ«Γ―Γ£Γ©Γ³Γ¬Γ―Γ² Γ΄Γ―Γµ Γ³Γ©Γ¬Γ©Γ«Γ΅Γ±Γ©Γ΄Γ©
 			if(similarity>min) {
 				bestCity=cities.get(i);
 			}
@@ -76,7 +76,33 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 		return bestCity;
 	}
     
-    
+    public ArrayList<City> CompareCities(ArrayList<City> cities,int integer) {
+		
+		for(int i=0;i<cities.size();i++) {
+			double simi=calculate_similarity(cities.get(i));
+		}
+	//   Arrays.sort(cities);///
+		return cities;
+	}
+	
+	
+	
+	
+	
+	
+    //freeticket
+    public static Traveller freeticket(ArrayList<Traveller> trav) throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException {
+    	Traveller Winner=trav.get(0);
+    	City city=new City("Rome","it");
+    	city.CityLatLon();
+    	city.CityTerms();
+    	for(int i=1;i<trav.size();i++) {
+    		if(trav.get(i).calculate_similarity(city)>Winner.calculate_similarity(city)) {
+    			Winner =trav.get(i);
+    		}
+    	}
+		return Winner;
+    }
     
     
     public double getCurGeodestic_vector(int index) {

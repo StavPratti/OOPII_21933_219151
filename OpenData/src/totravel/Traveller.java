@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
+import exceptions.WikipediaNoArcticleException;
+
  public abstract class Traveller implements Comparable<Traveller> {
 	
 	private String city;
@@ -109,7 +111,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 	
 	
     //freeticket
-    public static Traveller freeticket(ArrayList<Traveller> trav) throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
+    public static Traveller freeticket(ArrayList<Traveller> trav) throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException {
     	Traveller Winner=trav.get(0);
     	City city=new City("Rome","it");
     	city.CityLatLon();

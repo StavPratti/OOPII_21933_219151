@@ -8,6 +8,15 @@ import weather.OpenWeatherMap;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
+
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriBuilder;
+
+import exceptions.WikipediaNoArcticleException;
 import wikipedia.MediaWiki;
 
 public class City {
@@ -40,19 +49,29 @@ public class City {
 	 * @throws IOException 
 	 * @throws MalformedURLException 
 	 * @throws JsonMappingException 
-	 * @throws JsonParseException */ 
+	 * @throws JsonParseException 
+	 * @throws WikipediaNoArcticleException */ 
 	//φτιαχνει τον πίνακα terms_vector
-	public void CityTerms() throws JsonParseException, JsonMappingException, MalformedURLException, IOException{
+	public void CityTerms() throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException{
 	 
-		
-     String[] terms_vector_strings=new String[]{"sea","walls","ancient","mountain","brige","museum","squeare","restaurant","view","forest"};;
-	 ObjectMapper mapper = new ObjectMapper(); 
-	 MediaWiki mediaWiki_obj =  mapper.readValue(new URL("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles="+city+"&format=json&formatversion=2"),MediaWiki.class);
-	 for(int i=0;i<terms_vector_strings.length;i++) {
-		 int count=countCriterionfCity(mediaWiki_obj.getQuery().getPages().get(0).getExtract(),terms_vector_strings[i]);
-		 terms_vector[i]=count;
-	  }
-	}
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource service = client.resource(UriBuilder.fromUri("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles="+city+"&format=json&formatversion=2").build());      
+		String[] terms_vector_strings=new String[]{"sea","walls","ancient","mountain","brige","museum","squeare","restaurant","view","forest"};;
+		ObjectMapper mapper = new ObjectMapper(); 
+		String json= service.accept(MediaType.APPLICATION_JSON).get(String.class); 
+		if (json.contains("pageid")) {
+			MediaWiki mediaWiki_obj =  mapper.readValue(new URL("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles="+city+"&format=json&formatversion=2"),MediaWiki.class);
+			for(int i=0;i<terms_vector_strings.length;i++) {
+				int count=countCriterionfCity(mediaWiki_obj.getQuery().getPages().get(0).getExtract(),terms_vector_strings[i]);
+				terms_vector[i]=count;
+			}
+		} else {
+			throw new WikipediaNoArcticleException(city);
+			
+		}
+    }
+	
 	 
 	
     //φτιαχνει τον πίνακα geodestic_vector

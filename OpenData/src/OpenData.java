@@ -12,22 +12,22 @@ import totravel.YoungTraveller;
 
 public class OpenData {
 	public static void main(String[] args) throws IOException, WikipediaNoArcticleException {
-		//νεος ταξιδιώτης
+		//Γ­Γ¥Γ―Γ² Γ΄Γ΅Γ®Γ©Γ¤Γ©ΓΎΓ΄Γ§Γ²
 		BufferedReader stdin=new BufferedReader(new InputStreamReader(System.in));
 		String cityname="mhloikl";
 		
 		
-		City city1=new City(cityname,"it");//παρομοια μπορω να φτιαξω και αλλες πολεις
 		
+		City city1;
 		while (true) {		
 			try {		
-	
+	             city1=new City(cityname,"it");//Γ°Γ΅Γ±Γ―Γ¬Γ―Γ©Γ΅ Γ¬Γ°Γ―Γ±ΓΉ Γ­Γ΅ Γ¶Γ΄Γ©Γ΅Γ®ΓΉ ΓªΓ΅Γ© Γ΅Γ«Γ«Γ¥Γ² Γ°Γ―Γ«Γ¥Γ©Γ²
 				
-				city1.CityTerms();//για την συγκεκριμενη πολη φτιαχνει τα τερμσ
+				city1.CityTerms();//Γ£Γ©Γ΅ Γ΄Γ§Γ­ Γ³ΓµΓ£ΓªΓ¥ΓªΓ±Γ©Γ¬Γ¥Γ­Γ§ Γ°Γ―Γ«Γ§ Γ¶Γ΄Γ©Γ΅Γ·Γ­Γ¥Γ© Γ΄Γ΅ Γ΄Γ¥Γ±Γ¬Γ³
 			
 				//City city2=new City("Corfu","gr");
 				//city2.CityTerms();
-				//city2.CityLatLon();// θα τα τρεχω εδω ή στην κομπερ σιτις
+				//city2.CityLatLon();// Γ¨Γ΅ Γ΄Γ΅ Γ΄Γ±Γ¥Γ·ΓΉ Γ¥Γ¤ΓΉ Γ Γ³Γ΄Γ§Γ­ ΓªΓ―Γ¬Γ°Γ¥Γ± Γ³Γ©Γ΄Γ©Γ²
 			   break;
 			} catch (WikipediaNoArcticleException e) {
 				System.out.println(e.getMessage());
@@ -37,7 +37,7 @@ public class OpenData {
 			}
 			
 		}
-		city1.CityLatLon();//το τατ λοτ, ωστε με γκετερς να μπορω να τα χρησιμοποιησω μετα
+		city1.CityLatLon();//Γ΄Γ― Γ΄Γ΅Γ΄ Γ«Γ―Γ΄, ΓΉΓ³Γ΄Γ¥ Γ¬Γ¥ Γ£ΓªΓ¥Γ΄Γ¥Γ±Γ² Γ­Γ΅ Γ¬Γ°Γ―Γ±ΓΉ Γ­Γ΅ Γ΄Γ΅ Γ·Γ±Γ§Γ³Γ©Γ¬Γ―Γ°Γ―Γ©Γ§Γ³ΓΉ Γ¬Γ¥Γ΄Γ΅
 		
 		
 	   // ArrayList<City> cities=new ArrayList<City>();
@@ -58,11 +58,11 @@ public class OpenData {
 		//tr.FavoriteCityTerms();
 	//System.out.println(tr.calculate_similarity(city1)); //similarity athens-rome
 	//System.out.println(tr.calculate_similarity(city2)); //similarity athens-corfu
-		//μεσήλικας ταξιδιώτης
+		//Γ¬Γ¥Γ³ΓΓ«Γ©ΓªΓ΅Γ² Γ΄Γ΅Γ®Γ©Γ¤Γ©ΓΎΓ΄Γ§Γ²
 		
 		
 		
-		//γερος ταξιδιώτης
+		//Γ£Γ¥Γ±Γ―Γ² Γ΄Γ΅Γ®Γ©Γ¤Γ©ΓΎΓ΄Γ§Γ²
 		//ElderTraveller elder=new ElderTraveller("Athens","gr");
 		//elder.CurrentlyCityLatLon();
 		//elder.FavoriteCityTerms();
@@ -76,21 +76,12 @@ public class OpenData {
 		travellers.add(elder1);
 		elder1.setRating_vector(new int[] {2,9,9,9,3,10,8,9,9,1});
 		travellers.add(young1);
-		System.out.println(freeticket(travellers));//διευθυνση μνημης
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		System.out.println(freeticket(travellers));//Γ¤Γ©Γ¥ΓµΓ¨ΓµΓ­Γ³Γ§ Γ¬Γ­Γ§Γ¬Γ§Γ²
 		
 	}
-}
+
+}	
+		
+
+
+

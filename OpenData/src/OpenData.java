@@ -17,10 +17,12 @@ public class OpenData {
 		String cityname="mhloikl";
 		
 		
+		City city1=new City(cityname,"it");//παρομοια μπορω να φτιαξω και αλλες πολεις
+		
 		while (true) {		
 			try {		
 	
-				City city1=new City(cityname,"it");//παρομοια μπορω να φτιαξω και αλλες πολεις
+				
 				city1.CityTerms();//για την συγκεκριμενη πολη φτιαχνει τα τερμσ
 			
 				//City city2=new City("Corfu","gr");
@@ -35,7 +37,7 @@ public class OpenData {
 			}
 			
 		}
-			//city1.CityLatLon();//το τατ λοτ, ωστε με γκετερς να μπορω να τα χρησιμοποιησω μετα
+		city1.CityLatLon();//το τατ λοτ, ωστε με γκετερς να μπορω να τα χρησιμοποιησω μετα
 		
 		
 	   // ArrayList<City> cities=new ArrayList<City>();

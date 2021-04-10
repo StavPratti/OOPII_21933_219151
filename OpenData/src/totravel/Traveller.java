@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-
 import exceptions.WikipediaNoArcticleException;
 
  public abstract class Traveller implements Comparable<Traveller> {

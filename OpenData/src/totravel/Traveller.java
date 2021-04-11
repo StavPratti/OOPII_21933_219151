@@ -3,11 +3,14 @@ package totravel;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import exceptions.WikipediaNoArcticleException;
+import exceptions.WikipediaNoCityException;
 
  public abstract class Traveller implements Comparable<Traveller> {
 	
@@ -95,12 +98,28 @@ import exceptions.WikipediaNoArcticleException;
 	
 
 	
-	public ArrayList<City> CompareCities(ArrayList<City> cities,int integer) {
+public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
 		
+		ArrayList<Double> cities_sim = new ArrayList<Double>();//σωζω similarity σε arraylist
+				
 		for(int i=0;i<cities.size();i++) {
-			double simi=calculate_similarity(cities.get(i));
+			cities_sim.add(calculate_similarity(cities.get(i)));
 		}
-	//   Arrays.sort(cities);///
+		
+		Map<Double, City> map = new HashMap<Double, City>();//φτιαχνω map που θα σωζει με σχεση key/value την similarity και τι ςities
+		for(int i = 0; i < cities_sim.size(); i++) {
+		  map.put(cities_sim.get(i), cities.get(i));   
+		}
+
+
+		Collections.sort(cities_sim);//κανω sort την arraylist ομοιοτητας με το comparable interface
+		cities.clear();//καθαριζω την cities rraylist
+
+		for(int i = 0; i < map.size(); i++) {//φτιαχνω ξανα την cities arraylist συμφωνα με την σειρα στην arraylist ομοιοτητας 
+		  cities.add(map.get(cities_sim.get(i)));//και χρησιμοποιοντας την key/value σχεση του map
+		}
+
+		cities.remove(1);//αφαιρω την 1η πολη
 		return cities;
 	}
 	
@@ -110,7 +129,7 @@ import exceptions.WikipediaNoArcticleException;
 	
 	
     //freeticket
-    public static Traveller freeticket(ArrayList<Traveller> trav) throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException {
+    public static Traveller freeticket(ArrayList<Traveller> trav) throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException, WikipediaNoCityException {
     	Traveller Winner=trav.get(0);
     	City city=new City("Rome","it");
     	city.CityLatLon();
@@ -164,14 +183,22 @@ import exceptions.WikipediaNoArcticleException;
 	}
 
 
-	public int compareto(Traveller trav) {
-		if(this.similarity>trav.similarity) {
-			return 1;
-		}
-		if(this.similarity<trav.similarity) {
-			return -1;
-		}
-		return 0;
+
+
+	
+	@Override
+	public int compareTo(Traveller trav) {
+		
+			if(this.similarity>trav.similarity) {
+				return 1;
+			}
+			if(this.similarity<trav.similarity) {
+				return -1;
+			}
+			return 0;
+		
+
+		
 	}
 
 

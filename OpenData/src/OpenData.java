@@ -2,8 +2,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
 import exceptions.WikipediaNoArcticleException;
+import exceptions.WikipediaNoCityException;
 import totravel.City;
 import totravel.ElderTraveller;
 import totravel.Traveller;
@@ -11,7 +11,7 @@ import static totravel.Traveller.*;
 import totravel.YoungTraveller;
 
 public class OpenData {
-	public static void main(String[] args) throws IOException, WikipediaNoArcticleException {
+	public static void main(String[] args) throws IOException, WikipediaNoArcticleException ,WikipediaNoCityException{
 		//íåïò ôáîéäéþôçò
 		BufferedReader stdin=new BufferedReader(new InputStreamReader(System.in));
 		String cityname="mhloikl";
@@ -34,7 +34,14 @@ public class OpenData {
 				System.out.print("Type a correct city name: ");
 				cityname = stdin.readLine();
 				continue;
+			}catch (WikipediaNoCityException e) {
+				System.out.println(e.getMessage());
+				System.out.print("Type a real city name: ");
+				cityname = stdin.readLine();
+				continue;
 			}
+
+
 			
 		}
 		city1.CityLatLon();//ôï ôáô ëïô, ùóôå ìå ãêåôåñò íá ìðïñù íá ôá ÷ñçóéìïðïéçóù ìåôá

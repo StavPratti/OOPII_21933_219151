@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
 import exceptions.WikipediaNoArcticleException;
+import exceptions.WikipediaNoCityException;
 import wikipedia.MediaWiki;
 
 public class City {
@@ -50,9 +51,14 @@ public class City {
 	 * @throws MalformedURLException 
 	 * @throws JsonMappingException 
 	 * @throws JsonParseException 
-	 * @throws WikipediaNoArcticleException */ 
+	 * @throws WikipediaNoArcticleException 
+	 * @throws WikipediaNoCityException */ 
 	//φτιαχνει τον πίνακα terms_vector
-	public void CityTerms() throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException{
+	public void CityTerms() throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException, WikipediaNoCityException{
+		
+        if(city!="Rome" || city!="Corfu"|| city!="Athens" ) {
+        	throw new WikipediaNoCityException(city);
+		}
 	 
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);

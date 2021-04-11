@@ -19,12 +19,14 @@ import exceptions.WikipediaNoCityException;
 	private double[] currently_geodestic_vector=new double[2];
 	private int[] rating_vector=new int [10];
 	protected double similarity;
+    private String name;
 
 
 
 
 	public Traveller(String city,String country) {
 		this.similarity=0;
+		this.name="Takis";
 		this.city=city;	
 		this.country=country;
 		this.rating_vector=new int[] {0,0,10,0,0,10,8,0,0,1};
@@ -51,28 +53,7 @@ import exceptions.WikipediaNoCityException;
 	 * @throws JsonMappingException 
 	 * @throws JsonParseException */
 	
-	//κριτήρια που ενδιαφέρουνε τον traveller
-	/*public void FavoriteCityTerms() {
-	   rating_vector[0]= 2;
-	   rating_vector[1]=4;
-	   rating_vector[2]=10;
-	   rating_vector[3]=5;
-	   rating_vector[4]=3;
-	   rating_vector[5]=10;
-	   rating_vector[6]=8;
-	   rating_vector[7]=0;
-	   rating_vector[8]=0;
-	   rating_vector[9]=1;  
-	  }*/
-	
-	
-      //συντεταγμένες του traveller
-	/*  public void CurrentlyCityLatLon() {
-		currently_geodestic_vector[0]=37.9795;
-		currently_geodestic_vector[1]=23.7162;
-	}*/
 
-	
     abstract double calculate_similarity(City object);
     
 
@@ -86,8 +67,6 @@ import exceptions.WikipediaNoCityException;
 		double min=-1.2;
 		City bestCity = null;
 		for(int i=0;i<cities.size();i++) {
-			//cities.get(i).CityLatLon();//ωστε να υπολογιστει το lat,lon
-			//cities.get(i).CityTerms();//countwords για την πολη
 			double similarity=calculate_similarity(cities.get(i)); //υπολογισμος του σιμιλαριτι
 			if(similarity>min) {
 				bestCity=cities.get(i);
@@ -115,17 +94,14 @@ public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
 		Collections.sort(cities_sim);//κανω sort την arraylist ομοιοτητας με το comparable interface
 		cities.clear();//καθαριζω την cities rraylist
 
-		for(int i = 0; i < map.size(); i++) {//φτιαχνω ξανα την cities arraylist συμφωνα με την σειρα στην arraylist ομοιοτητας 
+		for(int i = 0; i < integer; i++) {//φτιαχνω ξανα την cities arraylist συμφωνα με την σειρα στην arraylist ομοιοτητας 
 		  cities.add(map.get(cities_sim.get(i)));//και χρησιμοποιοντας την key/value σχεση του map
 		}
 
 		cities.remove(1);//αφαιρω την 1η πολη
+		
 		return cities;
 	}
-	
-	
-	
-	
 	
 	
     //freeticket
@@ -143,11 +119,17 @@ public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
     }
     
 
-
-
-
-
-	
+	@Override
+	public int compareTo(Traveller trav) {
+		
+			if(this.similarity>trav.similarity) {
+				return 1;
+			}
+			if(this.similarity<trav.similarity) {
+				return -1;
+			}
+			return 0;
+	}
 
 
 	public void setRating_vector(int[] rating_vector) {
@@ -184,26 +166,14 @@ public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
 
 
 
-
-	
-	@Override
-	public int compareTo(Traveller trav) {
-		
-			if(this.similarity>trav.similarity) {
-				return 1;
-			}
-			if(this.similarity<trav.similarity) {
-				return -1;
-			}
-			return 0;
-		
-
-		
+	public String getName() {
+		return name;
 	}
 
 
-	
-	
-	
+	public void setName(String name) {
+		this.name = name;
+	}
+
 
 }

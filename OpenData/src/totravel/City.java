@@ -56,9 +56,7 @@ public class City {
 	//φτιαχνει τον πίνακα terms_vector
 	public void CityTerms() throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException, WikipediaNoCityException{
 		
-        if(city!="Rome" || city!="Corfu"|| city!="Athens" ) {
-        	throw new WikipediaNoCityException(city);
-		}
+       
 	 
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);

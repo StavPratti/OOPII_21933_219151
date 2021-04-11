@@ -13,6 +13,6 @@ public class WikipediaNoCityException extends Exception {
 	
 	public String getMessage() {
 		
-		return "There is not any city in wikipedia named "+cityName+".";
+		return "There is not any city named "+cityName+".";
 	}
 }

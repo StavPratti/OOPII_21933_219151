@@ -4,15 +4,14 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import exceptions.WikipediaNoArcticleException;
-import exceptions.WikipediaNoCityException;
 
- public abstract class Traveller implements Comparable<Traveller> {
+
+ public abstract class Traveller  {
 	
 	private String city;
 	private String country;
@@ -23,10 +22,10 @@ import exceptions.WikipediaNoCityException;
 
 
 
-
+//κατασκευαστής
 	public Traveller(String city,String country) {
 		this.similarity=0;
-		this.name="Takis";
+		this.name="Takis";//κρατάω και το ονομα για να τυπώνω στην freeticket
 		this.city=city;	
 		this.country=country;
 		this.rating_vector=new int[] {0,0,10,0,0,10,8,0,0,1};
@@ -34,14 +33,6 @@ import exceptions.WikipediaNoCityException;
 	}
 	
 
-	public double getSimilarity() {
-		return similarity;
-	}
-
-
-	public void setSimilarity(double similarity) {
-		this.similarity = similarity;
-	}
 
 
 	/**Retrieves weather information, geotag (lan, lon) and a Wikipedia article for a given city.
@@ -54,7 +45,7 @@ import exceptions.WikipediaNoCityException;
 	 * @throws JsonParseException */
 	
 
-    abstract double calculate_similarity(City object);
+    abstract double calculate_similarity(City object); //δήλωση
     
 
     protected double SimilarityGeodesticVector(double distance) {
@@ -77,59 +68,48 @@ import exceptions.WikipediaNoCityException;
 	
 
 	
-public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
-		
-		ArrayList<Double> cities_sim = new ArrayList<Double>();//σωζω similarity σε arraylist
-				
+	public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
+		//πινακας με similarity
+		ArrayList<Double> cities_sim = new ArrayList<Double>();//σωζω similarity σε arraylist		
 		for(int i=0;i<cities.size();i++) {
 			cities_sim.add(calculate_similarity(cities.get(i)));
 		}
-		
-		Map<Double, City> map = new HashMap<Double, City>();//φτιαχνω map που θα σωζει με σχεση key/value την similarity και τι ςities
-		for(int i = 0; i < cities_sim.size(); i++) {
-		  map.put(cities_sim.get(i), cities.get(i));   
+		 
+
+		for(int i=0; i < (cities_sim.size()-1); i++){  //sorting
+             for(int j=0; j < (cities_sim.size()-i-1); j++){ 
+            	 if(cities_sim.get(j) < cities_sim.get(j+1)){  
+                    //swap elements 
+            		Collections.swap(cities_sim, j, j+1);  
+	           	    Collections.swap(cities, j, j+1);
+	             }  
+             }  
+	    }     
+        ArrayList<City> selectedCities= new ArrayList<>();    
+		for(int i = 1; i < integer; i++) { //βαζω σε νεο ArrayList χωρίς την πρωτη μεχρι τον ακεραιο
+		   selectedCities.add(cities.get(i));
 		}
-
-
-		Collections.sort(cities_sim);//κανω sort την arraylist ομοιοτητας με το comparable interface
-		cities.clear();//καθαριζω την cities rraylist
-
-		for(int i = 0; i < integer; i++) {//φτιαχνω ξανα την cities arraylist συμφωνα με την σειρα στην arraylist ομοιοτητας 
-		  cities.add(map.get(cities_sim.get(i)));//και χρησιμοποιοντας την key/value σχεση του map
-		}
-
-		cities.remove(1);//αφαιρω την 1η πολη
-		
-		return cities;
+		return selectedCities;
 	}
 	
-	
+
     //freeticket
-    public static Traveller freeticket(ArrayList<Traveller> trav) throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException, WikipediaNoCityException {
+    public static Traveller freeticket(ArrayList<Traveller> trav) throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException{
     	Traveller Winner=trav.get(0);
-    	City city=new City("Rome","it");
+    	City city=new City("Rome","it"); //εστω εισητηριο για ρώμη
     	city.CityLatLon();
     	city.CityTerms();
-    	for(int i=1;i<trav.size();i++) {
+    	for(int i=1;i<trav.size();i++) { //ψαχνω το μαξ
     		if(trav.get(i).calculate_similarity(city)>Winner.calculate_similarity(city)) {
     			Winner =trav.get(i);
     		}
     	}
+    	
 		return Winner;
     }
     
 
-	@Override
-	public int compareTo(Traveller trav) {
-		
-			if(this.similarity>trav.similarity) {
-				return 1;
-			}
-			if(this.similarity<trav.similarity) {
-				return -1;
-			}
-			return 0;
-	}
+
 
 
 	public void setRating_vector(int[] rating_vector) {
@@ -155,6 +135,15 @@ public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
 		this.city = city;
 	}
 	
+		public double getSimilarity() {
+		return similarity;
+	}
+
+
+	public void setSimilarity(double similarity) {
+		this.similarity = similarity;
+	}
+
 
 	public String getCountry() {
 		return country;

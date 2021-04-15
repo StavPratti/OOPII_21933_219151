@@ -17,7 +17,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
 import exceptions.WikipediaNoArcticleException;
-import exceptions.WikipediaNoCityException;
 import wikipedia.MediaWiki;
 
 public class City {
@@ -27,15 +26,7 @@ public class City {
 	private int[] terms_vector=new int[10];
 	private double[] geodestic_vector=new double[2];
 	private String country;
-	protected static double similarityofthetrav;
 
-	public static double getSimilarityofthetrav() {
-		return similarityofthetrav;
-	}
-
-	public static void setSimilarityofthetrav(double similarityofthetrav) {
-		City.similarityofthetrav = similarityofthetrav;
-	}
 
 	public City(String city,String country) {
 		this.city=city;	
@@ -54,7 +45,7 @@ public class City {
 	 * @throws WikipediaNoArcticleException 
 	 * @throws WikipediaNoCityException */ 
 	//φτιαχνει τον πίνακα terms_vector
-	public void CityTerms() throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException, WikipediaNoCityException{
+	public void CityTerms() throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException{
 		
        
 	 

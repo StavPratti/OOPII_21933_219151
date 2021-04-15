@@ -34,11 +34,7 @@ public double similarity_terms_vector(City cit){
             return (double)(sum)/(Math.sqrt(sum1)+Math.sqrt(sum2));
      }
 
-@Override
-public int compareTo(Traveller o) {
-	// TODO Auto-generated method stub
-	return 0;
-}
+
 		
 
 
@@ -46,6 +42,8 @@ public int compareTo(Traveller o) {
  public double calculate_similarity(City object) {
 	double p=0.70;
 	double distance=distance(getCurGeodestic_vector(0),getCurGeodestic_vector(1),object.getGeodestic_vector(0),object.getGeodestic_vector(1),'M');
+	//η σημειωση είναι για να δω το σιμιλαριτι της πολης ωστε να τσεκαρω αν ειναι σωστες οι comparecities 
+	//System.out.println(p*similarity_terms_vector(object)+(1-p)*SimilarityGeodesticVector(distance));
 	return p*similarity_terms_vector(object)+(1-p)*SimilarityGeodesticVector(distance);
 	}
 

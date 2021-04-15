@@ -10,9 +10,11 @@ public class ElderTraveller extends Traveller {
 	}
 
 	@Override
-	public double calculate_similarity(City object) {	
+	public double calculate_similarity(City object) {	//υλοποίηση 
 		double p=0.05;	
 		double distance=distance(getCurGeodestic_vector(0),getCurGeodestic_vector(1),object.getGeodestic_vector(0),object.getGeodestic_vector(1),'M');
+		//η σημειωση είναι για να δω το σιμιλαριτι της πολης ωστε να τσεκαρω αν ειναι σωστες οι comparecities 
+		//System.out.println(p*similarity_terms_vector(object)+(1-p)*SimilarityGeodesticVector(distance));
 		return p*similarity_terms_vector(object)+(1-p)*SimilarityGeodesticVector(distance);
 		
 	}
@@ -46,14 +48,5 @@ public class ElderTraveller extends Traveller {
 
 
 
-	@Override
-	public int compareTo(Traveller trav) {
-		if(this.similarity>trav.similarity) {
-			return 1;
-		}
-		if(this.similarity<trav.similarity) {
-			return -1;
-		}
-		return 0;
-	}
+
 }

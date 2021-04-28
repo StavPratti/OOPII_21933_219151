@@ -44,27 +44,6 @@ public class YoungTraveller extends Traveller {
 	}
 
 
-
-	
-
-
-	
-	@Override
-	public int compareTo(Traveller trav) {
-		
-			if(this.similarity>trav.similarity) {
-				return 1;
-			}
-			if(this.similarity<trav.similarity) {
-				return -1;
-			}
-			return 0;
-		
-
-		
-	}
-
-
 }
 	
 	

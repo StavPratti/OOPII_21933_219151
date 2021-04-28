@@ -26,15 +26,7 @@ public class City {
 	private int[] terms_vector=new int[10];
 	private double[] geodestic_vector=new double[2];
 	private String country;
-	protected static double similarityofthetrav;
 
-	public static double getSimilarityofthetrav() {
-		return similarityofthetrav;
-	}
-
-	public static void setSimilarityofthetrav(double similarityofthetrav) {
-		City.similarityofthetrav = similarityofthetrav;
-	}
 
 	public City(String city,String country) {
 		this.city=city;	
@@ -50,9 +42,12 @@ public class City {
 	 * @throws MalformedURLException 
 	 * @throws JsonMappingException 
 	 * @throws JsonParseException 
-	 * @throws WikipediaNoArcticleException */ 
-	//φτιαχνει τον πίνακα terms_vector
+	 * @throws WikipediaNoArcticleException 
+	 * @throws WikipediaNoCityException */ 
+	//Γ¶Γ΄Γ©Γ΅Γ·Γ­Γ¥Γ© Γ΄Γ―Γ­ Γ°ΓΓ­Γ΅ΓªΓ΅ terms_vector
 	public void CityTerms() throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException{
+		
+       
 	 
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
@@ -74,7 +69,7 @@ public class City {
 	
 	 
 	
-    //φτιαχνει τον πίνακα geodestic_vector
+    //Γ¶Γ΄Γ©Γ΅Γ·Γ­Γ¥Γ© Γ΄Γ―Γ­ Γ°ΓΓ­Γ΅ΓªΓ΅ geodestic_vector
 	public void CityLatLon() throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
 		ObjectMapper mapper2=new ObjectMapper();
 		
@@ -113,23 +108,24 @@ public class City {
 		this.city = city;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+

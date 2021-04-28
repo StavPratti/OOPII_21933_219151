@@ -34,13 +34,6 @@ public double similarity_terms_vector(City cit){
             return (double)(sum)/(Math.sqrt(sum1)+Math.sqrt(sum2));
      }
 
-@Override
-public int compareTo(Traveller o) {
-	// TODO Auto-generated method stub
-	return 0;
-}
-		
-
 
 @Override
  public double calculate_similarity(City object) {

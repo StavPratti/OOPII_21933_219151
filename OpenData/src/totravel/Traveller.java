@@ -3,25 +3,29 @@ package totravel;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import exceptions.WikipediaNoArcticleException;
 
- public abstract class Traveller implements Comparable<Traveller> {
+
+ public abstract class Traveller  {
 	
 	private String city;
 	private String country;
 	private double[] currently_geodestic_vector=new double[2];
 	private int[] rating_vector=new int [10];
 	protected double similarity;
+    private String name;
 
 
 
-
+//ΓªΓ΅Γ΄Γ΅Γ³ΓªΓ¥ΓµΓ΅Γ³Γ΄ΓΓ²
 	public Traveller(String city,String country) {
 		this.similarity=0;
+		this.name="Takis";//ΓªΓ±Γ΅Γ΄ΓΓΉ ΓªΓ΅Γ© Γ΄Γ― Γ―Γ­Γ―Γ¬Γ΅ Γ£Γ©Γ΅ Γ­Γ΅ Γ΄ΓµΓ°ΓΎΓ­ΓΉ Γ³Γ΄Γ§Γ­ freeticket
 		this.city=city;	
 		this.country=country;
 		this.rating_vector=new int[] {0,0,10,0,0,10,8,0,0,1};
@@ -29,14 +33,6 @@ import exceptions.WikipediaNoArcticleException;
 	}
 	
 
-	public double getSimilarity() {
-		return similarity;
-	}
-
-
-	public void setSimilarity(double similarity) {
-		this.similarity = similarity;
-	}
 
 
 	/**Retrieves weather information, geotag (lan, lon) and a Wikipedia article for a given city.
@@ -48,29 +44,8 @@ import exceptions.WikipediaNoArcticleException;
 	 * @throws JsonMappingException 
 	 * @throws JsonParseException */
 	
-	//κριτήρια που ενδιαφέρουνε τον traveller
-	/*public void FavoriteCityTerms() {
-	   rating_vector[0]= 2;
-	   rating_vector[1]=4;
-	   rating_vector[2]=10;
-	   rating_vector[3]=5;
-	   rating_vector[4]=3;
-	   rating_vector[5]=10;
-	   rating_vector[6]=8;
-	   rating_vector[7]=0;
-	   rating_vector[8]=0;
-	   rating_vector[9]=1;  
-	  }*/
-	
-	
-      //συντεταγμένες του traveller
-	/*  public void CurrentlyCityLatLon() {
-		currently_geodestic_vector[0]=37.9795;
-		currently_geodestic_vector[1]=23.7162;
-	}*/
 
-	
-    abstract double calculate_similarity(City object);
+    abstract double calculate_similarity(City object); //Γ¤ΓΓ«ΓΉΓ³Γ§
     
 
     protected double SimilarityGeodesticVector(double distance) {
@@ -83,9 +58,7 @@ import exceptions.WikipediaNoArcticleException;
 		double min=-1.2;
 		City bestCity = null;
 		for(int i=0;i<cities.size();i++) {
-			//cities.get(i).CityLatLon();//ωστε να υπολογιστει το lat,lon
-			//cities.get(i).CityTerms();//countwords για την πολη
-			double similarity=calculate_similarity(cities.get(i)); //υπολογισμος του σιμιλαριτι
+			double similarity=calculate_similarity(cities.get(i)); //ΓµΓ°Γ―Γ«Γ―Γ£Γ©Γ³Γ¬Γ―Γ² Γ΄Γ―Γµ Γ³Γ©Γ¬Γ©Γ«Γ΅Γ±Γ©Γ΄Γ©
 			if(similarity>min) {
 				bestCity=cities.get(i);
 			}
@@ -95,40 +68,48 @@ import exceptions.WikipediaNoArcticleException;
 	
 
 	
-	public ArrayList<City> CompareCities(ArrayList<City> cities,int integer) {
-		
+	public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
+		//Γ°Γ©Γ­Γ΅ΓªΓ΅Γ² Γ¬Γ¥ similarity
+		ArrayList<Double> cities_sim = new ArrayList<Double>();//Γ³ΓΉΓ¦ΓΉ similarity Γ³Γ¥ arraylist		
 		for(int i=0;i<cities.size();i++) {
-			double simi=calculate_similarity(cities.get(i));
+			cities_sim.add(calculate_similarity(cities.get(i)));
 		}
-	//   Arrays.sort(cities);///
-		return cities;
+		 
+
+		for(int i=0; i < (cities_sim.size()-1); i++){  //sorting
+             for(int j=0; j < (cities_sim.size()-i-1); j++){ 
+            	 if(cities_sim.get(j) < cities_sim.get(j+1)){  
+                    //swap elements 
+            		Collections.swap(cities_sim, j, j+1);  
+	           	    Collections.swap(cities, j, j+1);
+	             }  
+             }  
+	    }     
+        ArrayList<City> selectedCities= new ArrayList<>();    
+		for(int i = 1; i < integer; i++) { //ΓΆΓ΅Γ¦ΓΉ Γ³Γ¥ Γ­Γ¥Γ― ArrayList Γ·ΓΉΓ±ΓΓ² Γ΄Γ§Γ­ Γ°Γ±ΓΉΓ΄Γ§ Γ¬Γ¥Γ·Γ±Γ© Γ΄Γ―Γ­ Γ΅ΓªΓ¥Γ±Γ΅Γ©Γ―
+		   selectedCities.add(cities.get(i));
+		}
+		return selectedCities;
 	}
 	
-	
-	
-	
-	
-	
+
     //freeticket
-    public static Traveller freeticket(ArrayList<Traveller> trav) throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException {
+    public static Traveller freeticket(ArrayList<Traveller> trav) throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException{
     	Traveller Winner=trav.get(0);
-    	City city=new City("Rome","it");
+    	City city=new City("Rome","it"); //Γ¥Γ³Γ΄ΓΉ Γ¥Γ©Γ³Γ§Γ΄Γ§Γ±Γ©Γ― Γ£Γ©Γ΅ Γ±ΓΎΓ¬Γ§
     	city.CityLatLon();
     	city.CityTerms();
-    	for(int i=1;i<trav.size();i++) {
+    	for(int i=1;i<trav.size();i++) { //ΓΈΓ΅Γ·Γ­ΓΉ Γ΄Γ― Γ¬Γ΅Γ®
     		if(trav.get(i).calculate_similarity(city)>Winner.calculate_similarity(city)) {
     			Winner =trav.get(i);
     		}
     	}
+    	
 		return Winner;
     }
     
 
 
-
-
-
-	
 
 
 	public void setRating_vector(int[] rating_vector) {
@@ -154,6 +135,15 @@ import exceptions.WikipediaNoArcticleException;
 		this.city = city;
 	}
 	
+		public double getSimilarity() {
+		return similarity;
+	}
+
+
+	public void setSimilarity(double similarity) {
+		this.similarity = similarity;
+	}
+
 
 	public String getCountry() {
 		return country;
@@ -164,19 +154,15 @@ import exceptions.WikipediaNoArcticleException;
 	}
 
 
-	public int compareto(Traveller trav) {
-		if(this.similarity>trav.similarity) {
-			return 1;
-		}
-		if(this.similarity<trav.similarity) {
-			return -1;
-		}
-		return 0;
+
+	public String getName() {
+		return name;
 	}
 
 
-	
-	
-	
+	public void setName(String name) {
+		this.name = name;
+	}
+
 
 }

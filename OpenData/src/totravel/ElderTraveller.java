@@ -10,9 +10,11 @@ public class ElderTraveller extends Traveller {
 	}
 
 	@Override
-	public double calculate_similarity(City object) {	
+	public double calculate_similarity(City object) {	//õëïðïßçóç 
 		double p=0.05;	
 		double distance=distance(getCurGeodestic_vector(0),getCurGeodestic_vector(1),object.getGeodestic_vector(0),object.getGeodestic_vector(1),'M');
+		//ç óçìåéùóç åßíáé ãéá íá äù ôï óéìéëáñéôé ôçò ðïëçò ùóôå íá ôóåêáñù áí åéíáé óùóôåò ïé comparecities 
+		//System.out.println(p*similarity_terms_vector(object)+(1-p)*SimilarityGeodesticVector(distance));
 		return p*similarity_terms_vector(object)+(1-p)*SimilarityGeodesticVector(distance);
 		
 	}
@@ -29,19 +31,20 @@ public class ElderTraveller extends Traveller {
 		user[i]= getRatingVector(i);
 		//31,15,38,0,0,10,0,2,4,0
 		city[i]=cit.getTerms_vector(i);
-		if(city[i]>=1 && user[i]>=1) { //����
+		if(city[i]>=1 && user[i]>=1) { //ôïìç
 			sum_intersection+=1;
 		}
-		if(city[i]>=1 || user[i]>=1) { //�����
+		if(city[i]>=1 || user[i]>=1) { //åíùóç
 			sum_union+=1;
 		}
 	}
-	if (sum_union==0) {//������������
+	if (sum_union==0) {//ðáñïíïìáóôçò
 		return 0;
 	}
 	
 	return sum_intersection/sum_union;
 	}
+
 
 
 

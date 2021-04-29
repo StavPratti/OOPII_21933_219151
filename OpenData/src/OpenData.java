@@ -2,46 +2,74 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import exceptions.WikipediaNoArcticleException;
 import totravel.City;
 import totravel.ElderTraveller;
+import totravel.JacksonFile;
 import totravel.MiddleTraveller;
 import totravel.Traveller;
 import static totravel.Traveller.*;
 import totravel.YoungTraveller;
+import totravel.JacksonFile;
 
 public class OpenData {
-	public static void main(String[] args) throws IOException, WikipediaNoArcticleException {
+	public static void main(String[] args) throws IOException, WikipediaNoArcticleException, InterruptedException {
 		
 		BufferedReader stdin=new BufferedReader(new InputStreamReader(System.in));
 		
-		String cityname="nrei";//βάζω λάθος όνομα πόλης ωστε να πεταχτει εξαίρεση και να βάλω ονομσ
+		String cityname="nrei";//Ξ²Ξ¬Ξ¶Ο‰ Ξ»Ξ¬ΞΈΞΏΟ‚ ΟΞ½ΞΏΞΌΞ± Ο€ΟΞ»Ξ·Ο‚ Ο‰ΟƒΟ„Ξµ Ξ½Ξ± Ο€ΞµΟ„Ξ±Ο‡Ο„ΞµΞΉ ΞµΞΎΞ±Ξ―ΟΞµΟƒΞ· ΞΊΞ±ΞΉ Ξ½Ξ± Ξ²Ξ¬Ξ»Ο‰ ΞΏΞ½ΞΏΞΌΟƒ
 		                        //Rome
 		
-        //δήλωση πόλεων
+       //map apo cities
+		Map<String, City> mapOfCities = new HashMap<String, City>();
+		
+		
+		 //Ξ΄Ξ®Ξ»Ο‰ΟƒΞ· Ο€ΟΞ»ΞµΟ‰Ξ½
 		City city1;
 		City city2;
 		City city3;
 		City city4;
+		City city5;
 		
 		while (true) {		
 			try {		
-	             city1=new City(cityname,"it");//λάθος όνομα για να πεταχτει το exception
-				 city1.CityTerms();//δημιουργω πινακα με τα μετρημενα ορισματα
-			     city1.CityLatLon();//δημιουργώ πινακα με τις συντεταγμενες
-			     
-			     city2=new City("Corfu","gr");//2η πόλη
+	             city1=new City(cityname,"it");//Ξ»Ξ¬ΞΈΞΏΟ‚ ΟΞ½ΞΏΞΌΞ± Ξ³ΞΉΞ± Ξ½Ξ± Ο€ΞµΟ„Ξ±Ο‡Ο„ΞµΞΉ Ο„ΞΏ exception
+	             if(!mapOfCities.containsKey(city1)) {
+				 city1.CityTerms();//Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ο‰ Ο€ΞΉΞ½Ξ±ΞΊΞ± ΞΌΞµ Ο„Ξ± ΞΌΞµΟ„ΟΞ·ΞΌΞµΞ½Ξ± ΞΏΟΞΉΟƒΞΌΞ±Ο„Ξ±
+			     city1.CityLatLon();//Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ο Ο€ΞΉΞ½Ξ±ΞΊΞ± ΞΌΞµ Ο„ΞΉΟ‚ ΟƒΟ…Ξ½Ο„ΞµΟ„Ξ±Ξ³ΞΌΞµΞ½ΞµΟ‚
+			     mapOfCities.put(city1.getCity(),city1); //Rome
+	             }
+	             
+	             city2=new City("Corfu","gr");//2Ξ· Ο€ΟΞ»Ξ·
+	             if(!mapOfCities.containsKey(city2)) {
 				 city2.CityTerms();
 				 city2.CityLatLon();
-				 
-				 city3=new City("Berlin","de");//3η πόλη
+				 mapOfCities.put(city2.getCity(),city2); //Corfu
+	             }
+	             
+				 city3=new City("Berlin","de");//3Ξ· Ο€ΟΞ»Ξ·
+				 if(!mapOfCities.containsKey(city3)) {
 		     	 city3.CityTerms();
 				 city3.CityLatLon();
+				 mapOfCities.put(city3.getCity(),city3); //Berlin
+				 }
 				 
-				 city4=new City("Dublin","ger");//3η πόλη
+				 city4=new City("Dublin","ger");//3Ξ· Ο€ΟΞ»Ξ·
+				 if(!mapOfCities.containsKey(city4)) {
 		     	 city4.CityTerms();
 				 city4.CityLatLon();
+				 mapOfCities.put(city4.getCity(),city4); //Dublin
+				 }
 				 
+				 city5=new City("Dublin","ger");
+				 if(!mapOfCities.containsKey(city5)) {
+		     	 city4.CityTerms();
+				 city4.CityLatLon();
+				 mapOfCities.put(city5.getCity(),city5); //den xanabazei tin idia poli mesa
+				 }
 
 			     break;
 			   
@@ -52,9 +80,13 @@ public class OpenData {
 				continue;
 		}
 		}
-
-
-			//φτιαχνω arraylist με τις πόλεις
+		
+		/*for (String key: mapOfCities.keySet()) {
+            System.out.println(key);
+        } *///ektipwnei ta keys
+			
+		
+			//Ο†Ο„ΞΉΞ±Ο‡Ξ½Ο‰ arraylist ΞΌΞµ Ο„ΞΉΟ‚ Ο€ΟΞ»ΞµΞΉΟ‚
 			
 	    ArrayList<City> cities=new ArrayList<City>(); 
 	    cities.add(city1); //Rome
@@ -62,16 +94,30 @@ public class OpenData {
 	    cities.add(city3); //Berlin
 	    cities.add(city4); //Dublin
 		
-	    //το ιδιο μπορω να το κανω και με εναν middle ,elder
-		YoungTraveller tr=new YoungTraveller("Athens","gr"); //φτιαχνω έναν νέο ταξιδιώτη
-		City bestCity=tr.CompareCities(cities); //καλώ την comparecities για να επιστρέψει την πιο ιδανική πόλη
-		System.out.println("The best city for the traveller is : "+bestCity.getCity());//τυπώνω την πιο ιδανικη
+	    
+	    
+	    ArrayList<Traveller> travellers = new ArrayList<>(); //arraylist me tous travellers
+	    //Ο„ΞΏ ΞΉΞ΄ΞΉΞΏ ΞΌΟ€ΞΏΟΟ‰ Ξ½Ξ± Ο„ΞΏ ΞΊΞ±Ξ½Ο‰ ΞΊΞ±ΞΉ ΞΌΞµ ΞµΞ½Ξ±Ξ½ middle ,elder
+		YoungTraveller youngTravellerExample=new YoungTraveller("Athens","gr"); //Ο†Ο„ΞΉΞ±Ο‡Ξ½Ο‰ Ξ­Ξ½Ξ±Ξ½ Ξ½Ξ­ΞΏ Ο„Ξ±ΞΎΞΉΞ΄ΞΉΟΟ„Ξ·
+		travellers.add(youngTravellerExample);//ton bazw kai sto collection
 		
+		//ΞΊΞ±Ξ»Ο Ο„Ξ·Ξ½ comparecities Ξ³ΞΉΞ± Ξ½Ξ± ΞµΟ€ΞΉΟƒΟ„ΟΞ­ΟΞµΞΉ Ο„Ξ·Ξ½ Ο€ΞΉΞΏ ΞΉΞ΄Ξ±Ξ½ΞΉΞΊΞ® Ο€ΟΞ»Ξ·
+		City bestCity=youngTravellerExample.CompareCities(cities); 
+		System.out.println("The best city for the traveller "+""+youngTravellerExample.getName()+ " "+ "is : "+bestCity.getCity());//Ο„Ο…Ο€ΟΞ½Ο‰ Ο„Ξ·Ξ½ Ο€ΞΉΞΏ ΞΉΞ΄Ξ±Ξ½ΞΉΞΊΞ·
 		
-		ArrayList<City> city =tr.CompareCities(cities, 4);//καλώ την comparecities για να επιστρέψει τις πιο ιδανικες πόλεις
+		//ΞΊΞ±Ξ»Ο Ο„Ξ·Ξ½ comparecities Ξ³ΞΉΞ± Ξ½Ξ± ΞµΟ€ΞΉΟƒΟ„ΟΞ­ΟΞµΞΉ Ο„ΞΉΟ‚ Ο€ΞΉΞΏ ΞΉΞ΄Ξ±Ξ½ΞΉΞΊΞµΟ‚ Ο€ΟΞ»ΞµΞΉΟ‚
+		ArrayList<City> city =youngTravellerExample.CompareCities(cities, 4);
 		for(int i=0;i<city.size();i++) {
-			System.out.println("The"+" "+(i+2)+" "+"best city is:"+city.get(i).getCity()); //τυπώνω με την δεύτερη compare cities
+			System.out.println("The"+" "+(i+2)+" "+"best city is:"+city.get(i).getCity()); //Ο„Ο…Ο€ΟΞ½Ο‰ ΞΌΞµ Ο„Ξ·Ξ½ Ξ΄ΞµΟΟ„ΞµΟΞ· compare cities
 		}
+		
+		//Ξ•ΟƒΟ„Ο‰ ΞΏΟ„ΞΉ ΞΏ ΞΉΞ΄ΞΉΞΏΟ‚ Ο„Ξ±ΞΎΞΉΞ΄ΞΉΟ‰Ο„Ξ·Ο‚ ΞΈΞµΞ»ΞµΞΉ Ξ½Ξ± Ξ²Ξ±Ξ»ΞµΞΉ Ξ΄ΞΉΞ±Ο†ΞΏΟΞµΟ„ΞΉΞΊΞ± ΞΊΟΞ·Ο„Ξ·ΟΞΉΞ±
+		YoungTraveller youngTravellerExampleAgain=new YoungTraveller("Athens","gr");
+		youngTravellerExampleAgain.setRating_vector(new int[] {6,8,0,0,0,0,0,0,0,0}); //Ξ²Ξ±Ξ¶Ο‰ Ξ¬Ξ»Ξ»Ξ± ΞΊΟΞ·Ο„Ξ®ΟΞΉΞ±
+		City bestCityAgain =youngTravellerExampleAgain.CompareCities(cities); 
+		System.out.println("The best city for the traveller "+""+youngTravellerExampleAgain.getName()+ " "+ "is : "+bestCityAgain.getCity());//Ο„Ο…Ο€ΟΞ½Ο‰ Ο„Ξ·Ξ½ Ο€ΞΉΞΏ ΞΉΞ΄Ξ±Ξ½ΞΉΞΊΞ·
+		travellers.add(youngTravellerExampleAgain);//Ο„ΞΏΞ½ Ο€ΟΞΏΟƒΞΈΞµΟ„Ο‰ ΟƒΟ„ΞΏ ΞΊΞΏΞ»Ξ»ΞµΞΊΟ„ΞΉΞΏΞ½
+		
 		
 		//tr.CurrentlyCityLatLon();
 		//tr.FavoriteCityTerms();
@@ -79,8 +125,13 @@ public class OpenData {
 	    //System.out.println(tr.calculate_similarity(city2)); //similarity athens-corfu
 	
 
+		
+		
+		
+		
+		
 		//free ticket
-		//φτιάχνω travellers
+		//Ο†Ο„ΞΉΞ¬Ο‡Ξ½Ο‰ travellers
 		YoungTraveller young1=new YoungTraveller("Athens","gr");
 		MiddleTraveller middle1=new MiddleTraveller("Athens","gr");
 		ElderTraveller elder1=new ElderTraveller("Athens","gr");
@@ -92,7 +143,7 @@ public class OpenData {
 		ElderTraveller elder3=new ElderTraveller("Berlin","de");
 		
 		
-		//αλλάζω τα default vectors 
+		//Ξ±Ξ»Ξ»Ξ¬Ξ¶Ο‰ Ο„Ξ± default vectors 
 		elder1.setRating_vector(new int[] {2,9,9,0,3,1,0,0,0,0});
 		middle1.setRating_vector(new int[] {0,4,2,7,1,0,0,0,9,1});
 		young2.setRating_vector(new int[] {2,1,5,6,7,8,9,7,7,7,});
@@ -103,13 +154,14 @@ public class OpenData {
 		middle3.setRating_vector(new int[] {0,1,2,9,9,4,0,1,9,7});
 		
 		
-		//αλλαζω τα λατ λον απο καποιους για να μην ειναι όλοι απο αθήνα
+		//Ξ±Ξ»Ξ»Ξ±Ξ¶Ο‰ Ο„Ξ± Ξ»Ξ±Ο„ Ξ»ΞΏΞ½ Ξ±Ο€ΞΏ ΞΊΞ±Ο€ΞΏΞΉΞΏΟ…Ο‚ Ξ³ΞΉΞ± Ξ½Ξ± ΞΌΞ·Ξ½ ΞµΞΉΞ½Ξ±ΞΉ ΟΞ»ΞΏΞΉ Ξ±Ο€ΞΏ Ξ±ΞΈΞ®Ξ½Ξ±
 		middle2.setCurGeodestic_vector(new double[] {52.5244,13.4105});
 		elder3.setCurGeodestic_vector(new double[] {52.5244,13.4105});
 		
-		//αλλάζω τα ονόματα τους
+		//Ξ±Ξ»Ξ»Ξ¬Ξ¶Ο‰ Ο„Ξ± ΞΏΞ½ΟΞΌΞ±Ο„Ξ± Ο„ΞΏΟ…Ο‚
+		young1.setName("Olga");
 		middle1.setName("Nikoleta");
-		elder1.setName("Nikos");
+		elder1.setName("Stavroula");
 		middle2.setName("Dimitris");
 		elder2.setName("Sia");
 		middle3.setName("Peggy");
@@ -118,7 +170,7 @@ public class OpenData {
 		young3.setName("Maria");
 		
 		
-		ArrayList<Traveller> travellers = new ArrayList<>(); 
+		
 		travellers.add(elder1);
 		travellers.add(young1);
 		travellers.add(middle1);
@@ -130,8 +182,40 @@ public class OpenData {
 		travellers.add(middle3);
 		
 		
+		JacksonFile json = new JacksonFile();
 		
-		System.out.println("The winner of the free ticket is : "+freeticket(travellers).getName());//τυπώνω τον νικητή του εισητηρίου
+	    ArrayList<Traveller> testtravellers = new ArrayList<>(); //arraylist me tous travellers apo deserialization
+
+
+		try {
+			
+			json.serializeTravellerData(travellers);
+			
+			testtravellers = json.deserializeTravellerData();
+
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+			
+	    
+		//kanw ena comparecities gia olous wste na exoun kanie toulaxiston mia anazitisi gia na exoun timestamp
+		for(int i=0;i<travellers.size();i++) { //etsi oloi tha exoun kanei mia anazitisi
+			travellers.get(i).CompareCities(cities);
+			TimeUnit.SECONDS.sleep(1);//Ο‰ΟƒΟ„Ξµ Ξ½Ξ± Ο…Ο€Ξ±ΟΟ‡ΞµΞΉ ΞµΞΌΟ†Ξ±Ξ½Ξ®Ο‚ Ξ΄ΞΉΞ±Ο†ΞΏΟΞ± ΟƒΟ„Ξ± Ξ΄ΞµΟ…Ο„ΞµΟΞΏΞ»ΞµΟ€Ο„Ξ± 
+		}
+		
+		
+	    //sort travellers by timestamp
+	    travellersSortingByTimestamp(travellers);//ΞµΟ€ΞΉΟƒΟ„ΟΞµΟ†ΞµΞΉ ΞµΞ½Ξ± Array Ο„Ξ±ΞΎΞΉΞ½ΞΏΞΌΞ·ΞΌΞµΞ½ΞΏ ΟƒΞµ Ξ±Ο…ΞΎΞΏΟ…ΟƒΞ± ΟƒΞµΞΉΟΞ± 
+		
+	    
+		System.out.println("The winner of the free ticket is : "+freeticket(travellers).getName());//Ο„Ο…Ο€ΟΞ½Ο‰ Ο„ΞΏΞ½ Ξ½ΞΉΞΊΞ·Ο„Ξ® Ο„ΞΏΟ… ΞµΞΉΟƒΞ·Ο„Ξ·ΟΞ―ΞΏΟ…
+		 
 		
 		}
 	}

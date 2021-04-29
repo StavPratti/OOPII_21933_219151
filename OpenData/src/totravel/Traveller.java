@@ -2,16 +2,25 @@ package totravel;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Collections;
+=======
+>>>>>>> branch 'master' of https://github.com/StavPratti/OOPII_21933_219151
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import exceptions.WikipediaNoArcticleException;
 
 
+
  public abstract class Traveller  {
+
+ public abstract class Traveller implements Comparable<Traveller> {
 	
 	private String city;
 	private String country;
@@ -20,19 +29,81 @@ import exceptions.WikipediaNoArcticleException;
 	protected double similarity;
     private String name;
 
+    private long timestamp;
+	private City visit;
+	
 
 
-//êáôáóêåõáóôÞò
+
+
+
 	public Traveller(String city,String country) {
 		this.similarity=0;
+
 		this.name="Takis";//êñáôÜù êáé ôï ïíïìá ãéá íá ôõðþíù óôçí freeticket
+
+		this.name="Takis";//������ ��� �� ����� ��� �� ������ ���� freeticket
 		this.city=city;	
 		this.country=country;
 		this.rating_vector=new int[] {0,0,10,0,0,10,8,0,0,1};
 		this.currently_geodestic_vector=new double[] {37.9795,23.7162};
+		this.timestamp=0;
 	}
 	
 
+	//method that checks for doublecates and sorts travellers by their timestamp
+	public static ArrayList<Traveller> travellersSortingByTimestamp(ArrayList<Traveller> travellers)  {
+		ArrayList<Traveller> checkedAndSortedTravellers=new ArrayList<Traveller>();
+		
+		Collections.sort(travellers);
+		int timesThatGotIntoTheLoop=0;
+		checkedAndSortedTravellers.add(travellers.get(0));
+		for(int i=1;i<travellers.size();i++) {
+			if(!(checkedAndSortedTravellers.contains(travellers.get(i)))) {
+				checkedAndSortedTravellers.add(travellers.get(i));
+			}
+		}
+		
+		/*for(int i=0;i<travellers.size();i++) {//��� �� �� �� ���� �������������� ����������
+			System.out.println(travellers.get(i).getName());
+			System.out.println(travellers.get(i).getTimestamp());
+		}
+		for(int i=0;i<checkedAndSortedTravellers.size();i++) {//��� �� �� �� ���� �������������� ����������
+			System.out.println(checkedAndSortedTravellers.get(i).getName());
+			System.out.println(checkedAndSortedTravellers.get(i).getTimestamp());
+		}*/
+		
+		return checkedAndSortedTravellers;
+	}
+	
+	 @Override
+	  public int compareTo(Traveller traveller){
+		 if(this.timestamp==traveller.timestamp)  
+			 return 0;  
+			 else if(this.timestamp>traveller.timestamp)  
+			 return 1;  
+			 else  
+			 return -1;  
+	  }
+	 
+	 @Override
+	    public boolean equals(Object traveller) {
+	  
+	        // If the object is compared with itself then return true  
+	        if (traveller == this) {
+	            return true;
+	        }
+	  
+	        // typecast o to Traveller so that we can compare them by name 
+	        Traveller c = (Traveller) traveller;
+	      
+	        if(c.name==this.name) {
+	        	return true;
+	        }else {
+	        	return false;
+	        }
+	    }
+	
 
 
 	/**Retrieves weather information, geotag (lan, lon) and a Wikipedia article for a given city.
@@ -45,7 +116,11 @@ import exceptions.WikipediaNoArcticleException;
 	 * @throws JsonParseException */
 	
 
+
     abstract double calculate_similarity(City object); //äÞëùóç
+
+    abstract double calculate_similarity(City object); //������
+
     
 
     protected double SimilarityGeodesticVector(double distance) {
@@ -55,22 +130,63 @@ import exceptions.WikipediaNoArcticleException;
     }
 	
 	public City CompareCities(ArrayList<City> cities) throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
+		
+		
+		Date date =new Date();
+		long timestampTemp=date.getTime();
+		if(timestamp==0 || timestamp>timestampTemp) {
+		   timestamp=timestampTemp;
+		}
+	
+		
+		
 		double min=-1.2;
 		City bestCity = null;
 		for(int i=0;i<cities.size();i++) {
+
 			double similarity=calculate_similarity(cities.get(i)); //õðïëïãéóìïò ôïõ óéìéëáñéôé
+
+			double similarity=calculate_similarity(cities.get(i)); //����������� ��� ����������
+
 			if(similarity>min) {
 				bestCity=cities.get(i);
 			}
 		}
+		setVisit(bestCity);
 		return bestCity;
 	}
 	
 
 	
 	public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
+
 		//ðéíáêáò ìå similarity
 		ArrayList<Double> cities_sim = new ArrayList<Double>();//óùæù similarity óå arraylist		
+		for(int i=0;i<cities.size();i++) {
+			cities_sim.add(calculate_similarity(cities.get(i)));
+
+		
+		Date date =new Date();
+		long timestampTemp=date.getTime();
+		if(timestamp==0 || timestamp>timestampTemp) {
+		   timestamp=timestampTemp;
+
+		for(int i=0; i < (cities_sim.size()-1); i++){  //sorting
+             for(int j=0; j < (cities_sim.size()-i-1); j++){ 
+            	 if(cities_sim.get(j) < cities_sim.get(j+1)){  
+                    //swap elements 
+            		Collections.swap(cities_sim, j, j+1);  
+	           	    Collections.swap(cities, j, j+1);
+	             }  
+             }  
+	    }     
+        ArrayList<City> selectedCities= new ArrayList<>();    
+		for(int i = 1; i < integer; i++) { //âáæù óå íåï ArrayList ÷ùñßò ôçí ðñùôç ìå÷ñé ôïí áêåñáéï
+
+		
+		
+		//������� �� similarity
+		ArrayList<Double> cities_sim = new ArrayList<Double>();//���� similarity �� arraylist		
 		for(int i=0;i<cities.size();i++) {
 			cities_sim.add(calculate_similarity(cities.get(i)));
 		}
@@ -86,7 +202,8 @@ import exceptions.WikipediaNoArcticleException;
              }  
 	    }     
         ArrayList<City> selectedCities= new ArrayList<>();    
-		for(int i = 1; i < integer; i++) { //âáæù óå íåï ArrayList ÷ùñßò ôçí ðñùôç ìå÷ñé ôïí áêåñáéï
+		for(int i = 1; i < integer; i++) { //���� �� ��� ArrayList ����� ��� ����� ����� ��� �������
+
 		   selectedCities.add(cities.get(i));
 		}
 		return selectedCities;
@@ -96,10 +213,18 @@ import exceptions.WikipediaNoArcticleException;
     //freeticket
     public static Traveller freeticket(ArrayList<Traveller> trav) throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException{
     	Traveller Winner=trav.get(0);
+
     	City city=new City("Rome","it"); //åóôù åéóçôçñéï ãéá ñþìç
+
+    	City city=new City("Rome","it"); //���� ��������� ��� ����
+
     	city.CityLatLon();
     	city.CityTerms();
+
     	for(int i=1;i<trav.size();i++) { //øá÷íù ôï ìáî
+
+    	for(int i=1;i<trav.size();i++) { //����� �� ���
+
     		if(trav.get(i).calculate_similarity(city)>Winner.calculate_similarity(city)) {
     			Winner =trav.get(i);
     		}
@@ -164,5 +289,31 @@ import exceptions.WikipediaNoArcticleException;
 		this.name = name;
 	}
 
+	 public long getTimestamp() {
+			return timestamp;
+		}
+
+
+
+
+		public void setTimestamp(long timestamp) {
+			this.timestamp = timestamp;
+		}
+
+
+
+	
+	public City getVisit() {
+		return visit;
+	}
+
+
+
+
+	public void setVisit(City visit) {
+		this.visit = visit;
+	}
 
 }
+		}
+ 

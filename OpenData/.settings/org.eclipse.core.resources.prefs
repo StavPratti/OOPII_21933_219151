@@ -1,3 +1,9 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=branch 'master' of https\://github.com/StavPratti/OOPII_21933_219151
 eclipse.preferences.version=1
+encoding//src/OpenData.java=UTF-8
 encoding//src/totravel/City.java=UTF-8
+encoding//src/totravel/ElderTraveller.java=UTF-8
+encoding//src/totravel/MiddleTraveller.java=UTF-8
 encoding//src/totravel/Traveller.java=UTF-8

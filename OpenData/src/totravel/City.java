@@ -44,7 +44,7 @@ public class City {
 	 * @throws JsonParseException 
 	 * @throws WikipediaNoArcticleException 
 	 * @throws WikipediaNoCityException */ 
-	//öôéá÷íåé ôïí ðßíáêá terms_vector
+
 	public void CityTerms() throws JsonParseException, JsonMappingException, MalformedURLException, IOException, WikipediaNoArcticleException{
 		
        
@@ -69,7 +69,6 @@ public class City {
 	
 	 
 	
-    //öôéá÷íåé ôïí ðßíáêá geodestic_vector
 	public void CityLatLon() throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
 		ObjectMapper mapper2=new ObjectMapper();
 		

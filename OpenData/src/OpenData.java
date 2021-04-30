@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 import exceptions.WikipediaNoArcticleException;
 import totravel.City;
 import totravel.ElderTraveller;
@@ -182,7 +186,7 @@ public class OpenData {
 		travellers.add(middle3);
 		
 		
-		JacksonFile json = new JacksonFile();
+	/*	JacksonFile json = new JacksonFile();
 		
 	    ArrayList<Traveller> testtravellers = new ArrayList<>(); //arraylist me tous travellers apo deserialization
 
@@ -200,7 +204,7 @@ public class OpenData {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+*/
 			
 	    
 		//kanw ena comparecities gia olous wste na exoun kanie toulaxiston mia anazitisi gia na exoun timestamp

@@ -6,7 +6,7 @@ public class ElderTraveller extends Traveller {
 
 	public ElderTraveller(String city, String country) {
 		super(city, country);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override

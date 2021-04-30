@@ -44,8 +44,10 @@ public class YoungTraveller extends Traveller {
 	}
 
 
+
+
+
 }
 	
 	
-
 

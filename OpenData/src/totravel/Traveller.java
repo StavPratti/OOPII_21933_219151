@@ -2,12 +2,6 @@ package totravel;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-<<<<<<< HEAD
-import java.util.ArrayList;
-import java.util.Collections;
-=======
->>>>>>> branch 'master' of https://github.com/StavPratti/OOPII_21933_219151
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -18,7 +12,6 @@ import exceptions.WikipediaNoArcticleException;
 
 
 
- public abstract class Traveller  {
 
  public abstract class Traveller implements Comparable<Traveller> {
 	
@@ -119,7 +112,6 @@ import exceptions.WikipediaNoArcticleException;
 
     abstract double calculate_similarity(City object); //äÞëùóç
 
-    abstract double calculate_similarity(City object); //������
 
     
 
@@ -146,7 +138,7 @@ import exceptions.WikipediaNoArcticleException;
 
 			double similarity=calculate_similarity(cities.get(i)); //õðïëïãéóìïò ôïõ óéìéëáñéôé
 
-			double similarity=calculate_similarity(cities.get(i)); //����������� ��� ����������
+		
 
 			if(similarity>min) {
 				bestCity=cities.get(i);
@@ -158,35 +150,17 @@ import exceptions.WikipediaNoArcticleException;
 	
 
 	
-	public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
-
-		//ðéíáêáò ìå similarity
-		ArrayList<Double> cities_sim = new ArrayList<Double>();//óùæù similarity óå arraylist		
-		for(int i=0;i<cities.size();i++) {
-			cities_sim.add(calculate_similarity(cities.get(i)));
-
+public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
 		
 		Date date =new Date();
 		long timestampTemp=date.getTime();
 		if(timestamp==0 || timestamp>timestampTemp) {
 		   timestamp=timestampTemp;
-
-		for(int i=0; i < (cities_sim.size()-1); i++){  //sorting
-             for(int j=0; j < (cities_sim.size()-i-1); j++){ 
-            	 if(cities_sim.get(j) < cities_sim.get(j+1)){  
-                    //swap elements 
-            		Collections.swap(cities_sim, j, j+1);  
-	           	    Collections.swap(cities, j, j+1);
-	             }  
-             }  
-	    }     
-        ArrayList<City> selectedCities= new ArrayList<>();    
-		for(int i = 1; i < integer; i++) { //âáæù óå íåï ArrayList ÷ùñßò ôçí ðñùôç ìå÷ñé ôïí áêåñáéï
-
+		}
 		
 		
-		//������� �� similarity
-		ArrayList<Double> cities_sim = new ArrayList<Double>();//���� similarity �� arraylist		
+		//πινακας με similarity
+		ArrayList<Double> cities_sim = new ArrayList<Double>();//σωζω similarity σε arraylist		
 		for(int i=0;i<cities.size();i++) {
 			cities_sim.add(calculate_similarity(cities.get(i)));
 		}
@@ -202,12 +176,12 @@ import exceptions.WikipediaNoArcticleException;
              }  
 	    }     
         ArrayList<City> selectedCities= new ArrayList<>();    
-		for(int i = 1; i < integer; i++) { //���� �� ��� ArrayList ����� ��� ����� ����� ��� �������
-
+		for(int i = 1; i < integer; i++) { //βαζω σε νεο ArrayList χωρίς την πρωτη μεχρι τον ακεραιο
 		   selectedCities.add(cities.get(i));
 		}
 		return selectedCities;
 	}
+	
 	
 
     //freeticket
@@ -216,12 +190,10 @@ import exceptions.WikipediaNoArcticleException;
 
     	City city=new City("Rome","it"); //åóôù åéóçôçñéï ãéá ñþìç
 
-    	City city=new City("Rome","it"); //���� ��������� ��� ����
-
     	city.CityLatLon();
     	city.CityTerms();
 
-    	for(int i=1;i<trav.size();i++) { //øá÷íù ôï ìáî
+    	
 
     	for(int i=1;i<trav.size();i++) { //����� �� ���
 
@@ -315,5 +287,5 @@ import exceptions.WikipediaNoArcticleException;
 	}
 
 }
-		}
+		
  

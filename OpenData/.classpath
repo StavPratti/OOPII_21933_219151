@@ -6,16 +6,20 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/stav/IdeaProjects/OOPII_21933_219151/OpenData/jars/commons-lang-2.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/stav/IdeaProjects/OOPII_21933_219151/OpenData/jars/commons-lang-2.6-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/stav/IdeaProjects/OOPII_21933_219151/OpenData/jars/commons-lang-2.6-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/stav/IdeaProjects/OOPII_21933_219151/OpenData/jars/jackson-annotations-2.9.8.jar"/>
-	<classpathentry kind="lib" path="C:/Users/stav/IdeaProjects/OOPII_21933_219151/OpenData/jars/jackson-core-2.9.8.jar"/>
-	<classpathentry kind="lib" path="C:/Users/stav/IdeaProjects/OOPII_21933_219151/OpenData/jars/jackson-databind-2.9.8.jar"/>
-	<classpathentry kind="lib" path="C:/Users/stav/Downloads/OpenDataREST-master/OpenDataREST-master/jars/httpclient-4.0.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/stav/Downloads/OpenDataREST-master/OpenDataREST-master/jars/javax.ws.rs.jar"/>
-	<classpathentry kind="lib" path="C:/Users/stav/Downloads/OpenDataREST-master/OpenDataREST-master/jars/jersey-client-1.19.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/stav/Downloads/OpenDataREST-master/OpenDataREST-master/jars/jersey-core-1.19.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/stav/Downloads/OpenDataREST-master/OpenDataREST-master/jars/jsr311-api-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/OpenDataREST-master/jars/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/OpenDataREST-master/jars/commons-lang-2.6-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/OpenDataREST-master/jars/commons-lang-2.6-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/OpenDataREST-master/jars/httpclient-4.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/OpenDataREST-master/jars/jackson-annotations-2.9.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/OpenDataREST-master/jars/jackson-core-2.9.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/OpenDataREST-master/jars/jackson-databind-2.9.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/OpenDataREST-master/jars/javax.ws.rs.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/OpenDataREST-master/jars/jersey-client-1.19.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/OpenDataREST-master/jars/jersey-core-1.19.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/OpenDataREST-master/jars/jsr311-api-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/OOPII-master/jars/google-collections-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/OOPII-master/jars/mysql-connector-java-8.0.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/OOPII-master/jars/mysql-connector-java-8.0.15-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/OOPII-master/jars/ojdbc6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

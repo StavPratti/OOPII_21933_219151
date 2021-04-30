@@ -98,9 +98,28 @@ public class OpenData {
 	    cities.add(city3); //Berlin
 	    cities.add(city4); //Dublin
 		
-	    
-	    
+
+		JacksonFile json = new JacksonFile();
+		
+	    //ArrayList<Traveller> testtravellers = new ArrayList<>(); //arraylist me tous travellers apo deserialization
 	    ArrayList<Traveller> travellers = new ArrayList<>(); //arraylist me tous travellers
+	    //το ιδιο μπορω να το κανω και με εναν middle ,elder
+
+		try {
+			
+			//json.serializeTravellerData(testtravellers);
+			
+			travellers = json.deserializeTravellerData();
+
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    
+	    //ArrayList<Traveller> travellers = new ArrayList<>(); //arraylist me tous travellers
 	    //το ιδιο μπορω να το κανω και με εναν middle ,elder
 		YoungTraveller youngTravellerExample=new YoungTraveller("Athens","gr"); //φτιαχνω έναν νέο ταξιδιώτη
 		travellers.add(youngTravellerExample);//ton bazw kai sto collection
@@ -185,17 +204,11 @@ public class OpenData {
 		travellers.add(young3);
 		travellers.add(middle3);
 		
-		
-	/*	JacksonFile json = new JacksonFile();
-		
-	    ArrayList<Traveller> testtravellers = new ArrayList<>(); //arraylist me tous travellers apo deserialization
-
-
 		try {
 			
 			json.serializeTravellerData(travellers);
 			
-			testtravellers = json.deserializeTravellerData();
+			//testtravellers = json.deserializeTravellerData();
 
 		} catch (JsonParseException e) {
 			e.printStackTrace();
@@ -204,7 +217,6 @@ public class OpenData {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-*/
 			
 	    
 		//kanw ena comparecities gia olous wste na exoun kanie toulaxiston mia anazitisi gia na exoun timestamp

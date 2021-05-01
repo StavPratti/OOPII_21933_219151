@@ -52,7 +52,7 @@ public class City {
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
 		WebResource service = client.resource(UriBuilder.fromUri("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles="+city+"&format=json&formatversion=2").build());      
-		String[] terms_vector_strings=new String[]{"sea","walls","ancient","mountain","brige","museum","squeare","restaurant","view","forest"};;
+		String[] terms_vector_strings=new String[]{"sea","walls","ancient","mountain","cafe","museum","squeare","restaurant","views","forest"};
 		ObjectMapper mapper = new ObjectMapper(); 
 		String json= service.accept(MediaType.APPLICATION_JSON).get(String.class); 
 		if (json.contains("pageid")) {
@@ -60,7 +60,9 @@ public class City {
 			for(int i=0;i<terms_vector_strings.length;i++) {
 				int count=countCriterionfCity(mediaWiki_obj.getQuery().getPages().get(0).getExtract(),terms_vector_strings[i]);
 				terms_vector[i]=count;
+				//System.out.println(terms_vector[i]);
 			}
+			System.out.println("  ");
 		} else {
 			throw new WikipediaNoArcticleException(city);
 			

@@ -5,8 +5,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import static moreinfo.CountWords.*;
 import weather.OpenWeatherMap;
@@ -78,11 +80,25 @@ public class City {
 	
 	public static ArrayList<City> fromMapToArrayList(Map<String,City> mapOfCities){
 		 ArrayList<City> arrayListOfCities=new ArrayList<>(); 
-		 for (Entry<String, City> entry : mapOfCities.entrySet()) {
+		/* for (Entry<String, City> entry : mapOfCities.entrySet()) {
 			    City value = entry.getValue();
 			    arrayListOfCities.add(value);
 			   
-			};
+			};*/
+		 
+		// Getting a Set of Key-value pairs
+		    Set entrySet = mapOfCities.entrySet();
+		 
+		    // Obtaining an iterator for the entry set
+		    Iterator it = entrySet.iterator();
+		 
+		    // Iterate through HashMap entries(Key-Value pairs)
+		    
+		    while(it.hasNext()){
+		       Map.Entry entry = (Map.Entry)it.next();
+		       arrayListOfCities.add((City) entry.getValue());
+		       
+		   }
 			
 		return arrayListOfCities;
 	}

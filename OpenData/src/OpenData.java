@@ -109,8 +109,8 @@ public class OpenData {
 			
 	    ArrayList<City> cities=new ArrayList<City>(fromMapToArrayList(mapOfCities));
 	    
-	    /*epalitheusi
-	    for(int i=0;i<cities.size();i++) {
+	    
+	    /*for(int i=0;i<cities.size();i++) {
 	    	System.out.println(cities.get(i).getCity());
 	    	System.out.println(cities.get(i).getGeodestic_vector(0));
 	    };*/

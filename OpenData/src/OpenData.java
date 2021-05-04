@@ -125,7 +125,7 @@ public class OpenData {
 
 		try {
 			
-			json.serializeTravellerData(testtravellers);
+			
 			
 			travellers = json.deserializeTravellerData();
 
@@ -237,6 +237,19 @@ public class OpenData {
 		   System.out.println(travellers.get(i).getName());
 	   }; */
 	   
+	   try {
+			
+			json.serializeTravellerData(travellers);
+			
+			
+
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	   
 		System.out.println("The winner of the free ticket is : "+freeticket(travellers).getName());//τυπώνω τον νικητή του εισητηρίου
 		 

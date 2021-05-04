@@ -31,7 +31,7 @@ public class DataBaseConnection {
  
 		try {
 			// DriverManager: The basic service for managing a set of JDBC drivers.	 //We connect to a DBMS.
-			db_con_obj = DriverManager.getConnection("jdbc:oracle:thin:@oracle12c.hua.gr:1521:orcl","IT21933","password");// Returns a connection to the URL.
+			db_con_obj = DriverManager.getConnection("jdbc:oracle:thin:@oracle12c.hua.gr:1521:orcl","IT219151","IT219151");// Returns a connection to the URL.
 			//Attempts to establish a connection to the given database URL. The DriverManager attempts to select an appropriate driver from the set of registered JDBC drivers.
 			if (db_con_obj != null) { 
 				System.out.println("Connection Successful! Enjoy. Now it's time to CRUD data. ");

@@ -3,6 +3,11 @@ package totravel;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import static moreinfo.CountWords.*;
 import weather.OpenWeatherMap;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -26,6 +31,8 @@ public class City {
 	private int[] terms_vector=new int[10];
 	private double[] geodestic_vector=new double[2];
 	private String country;
+
+
 
 
 	public City(String city,String country) {
@@ -62,14 +69,23 @@ public class City {
 				terms_vector[i]=count;
 				//System.out.println(terms_vector[i]);
 			}
-			System.out.println("  ");
+			//System.out.println("  ");
 		} else {
 			throw new WikipediaNoArcticleException(city);
 			
 		}
     }
 	
-	 
+	public static ArrayList<City> fromMapToArrayList(Map<String,City> mapOfCities){
+		 ArrayList<City> arrayListOfCities=new ArrayList<>(); 
+		 for (Entry<String, City> entry : mapOfCities.entrySet()) {
+			    City value = entry.getValue();
+			    arrayListOfCities.add(value);
+			   
+			};
+			
+		return arrayListOfCities;
+	}
 	
 	public void CityLatLon() throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
 		ObjectMapper mapper2=new ObjectMapper();
@@ -109,6 +125,13 @@ public class City {
 		this.city = city;
 	}
 	
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
 }
 	
 	

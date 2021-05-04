@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
+
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import exceptions.WikipediaNoArcticleException;
@@ -43,6 +44,9 @@ import exceptions.WikipediaNoArcticleException;
 		this.timestamp=0;
 	}
 	
+	
+	
+	
 
 	//method that checks for doublecates and sorts travellers by their timestamp
 	public static ArrayList<Traveller> travellersSortingByTimestamp(ArrayList<Traveller> travellers)  {
@@ -56,11 +60,13 @@ import exceptions.WikipediaNoArcticleException;
 				checkedAndSortedTravellers.add(travellers.get(i));
 			}
 		}
-		
-		/*for(int i=0;i<travellers.size();i++) {//��� �� �� �� ���� �������������� ����������
+		//tipoma gia epalitheusi oti exoume swsto apotelesma
+		/*
+		for(int i=0;i<travellers.size();i++) {//��� �� �� �� ���� �������������� ����������
 			System.out.println(travellers.get(i).getName());
 			System.out.println(travellers.get(i).getTimestamp());
 		}
+		System.out.println("  ");
 		for(int i=0;i<checkedAndSortedTravellers.size();i++) {//��� �� �� �� ���� �������������� ����������
 			System.out.println(checkedAndSortedTravellers.get(i).getName());
 			System.out.println(checkedAndSortedTravellers.get(i).getTimestamp());

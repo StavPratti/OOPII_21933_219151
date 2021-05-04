@@ -1,11 +1,13 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
+import static database.DataBaseConnection.*;
+import static totravel.City.*;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
@@ -20,15 +22,21 @@ import totravel.YoungTraveller;
 import totravel.JacksonFile;
 
 public class OpenData {
-	public static void main(String[] args) throws IOException, WikipediaNoArcticleException, InterruptedException {
+	public static void main(String[] args) throws IOException, WikipediaNoArcticleException, InterruptedException, SQLException {
 		
 		BufferedReader stdin=new BufferedReader(new InputStreamReader(System.in));
 		
-		String cityname="nrei";//βάζω λάθος όνομα πόλης ωστε να πεταχτει εξαίρεση και να βάλω ονομσ
+		String cityname="ngriej";//βάζω λάθος όνομα πόλης ωστε να πεταχτει εξαίρεση και να βάλω ονομσ
 		                        //Rome
 		
        //map apo cities
 		Map<String, City> mapOfCities = new HashMap<String, City>();
+		makeConnection();//ftiaxnw mia sindesi me tin basi mou
+		mapOfCities=ReadData(mapOfCities);//gemizw to map moy me tis poleis pou exw idi mesa stin basi mou
+		
+		
+		
+		//gemisma tou map me tis poleis poy yparxoun idi
 		
 		
 		 //δήλωση πόλεων
@@ -39,39 +47,46 @@ public class OpenData {
 		City city5;
 		
 		while (true) {		
-			try {		
+			try {	
+				//elegxos wste na mhn ksanakalesw open data gia kathe  poli
 	             city1=new City(cityname,"it");//λάθος όνομα για να πεταχτει το exception
-	             if(!mapOfCities.containsKey(city1)) {
+	             if(!mapOfCities.containsKey(city1.getCity())) {
 				 city1.CityTerms();//δημιουργω πινακα με τα μετρημενα ορισματα
 			     city1.CityLatLon();//δημιουργώ πινακα με τις συντεταγμενες
+			     addDataToTableCities(city1.getCity(),city1.getCountry(),city1.getGeodestic_vector(0),city1.getGeodestic_vector(1),city1.getTerms_vector(0),city1.getTerms_vector(1),city1.getTerms_vector(2),city1.getTerms_vector(3),city1.getTerms_vector(4),city1.getTerms_vector(5),city1.getTerms_vector(6),city1.getTerms_vector(7),city1.getTerms_vector(8),city1.getTerms_vector(9));
 			     mapOfCities.put(city1.getCity(),city1); //Rome
+			     System.out.println("This message will never be printed");
 	             }
 	             
 	             city2=new City("Corfu","gr");//2η πόλη
-	             if(!mapOfCities.containsKey(city2)) {
+	             if(!mapOfCities.containsKey(city2.getCity())) {
 				 city2.CityTerms();
 				 city2.CityLatLon();
+				 addDataToTableCities(city2.getCity(),city2.getCountry(),city2.getGeodestic_vector(0),city2.getGeodestic_vector(1),city2.getTerms_vector(0),city2.getTerms_vector(1),city2.getTerms_vector(2),city2.getTerms_vector(3),city2.getTerms_vector(4),city2.getTerms_vector(5),city2.getTerms_vector(6),city2.getTerms_vector(7),city2.getTerms_vector(8),city2.getTerms_vector(9));
 				 mapOfCities.put(city2.getCity(),city2); //Corfu
 	             }
 	             
 				 city3=new City("Berlin","de");//3η πόλη
-				 if(!mapOfCities.containsKey(city3)) {
+				 if(!mapOfCities.containsKey(city3.getCity())) {
 		     	 city3.CityTerms();
 				 city3.CityLatLon();
+				 addDataToTableCities(city3.getCity(),city3.getCountry(),city3.getGeodestic_vector(0),city3.getGeodestic_vector(1),city3.getTerms_vector(0),city3.getTerms_vector(1),city3.getTerms_vector(2),city3.getTerms_vector(3),city3.getTerms_vector(4),city3.getTerms_vector(5),city3.getTerms_vector(6),city3.getTerms_vector(7),city3.getTerms_vector(8),city3.getTerms_vector(9));
 				 mapOfCities.put(city3.getCity(),city3); //Berlin
 				 }
 				 
 				 city4=new City("Dublin","ger");//3η πόλη
-				 if(!mapOfCities.containsKey(city4)) {
+				 if(!mapOfCities.containsKey(city4.getCity())) {
 		     	 city4.CityTerms();
 				 city4.CityLatLon();
+				 addDataToTableCities(city4.getCity(),city4.getCountry(),city4.getGeodestic_vector(0),city4.getGeodestic_vector(1),city4.getTerms_vector(0),city4.getTerms_vector(1),city4.getTerms_vector(2),city4.getTerms_vector(3),city4.getTerms_vector(4),city4.getTerms_vector(5),city4.getTerms_vector(6),city4.getTerms_vector(7),city4.getTerms_vector(8),city4.getTerms_vector(9));
 				 mapOfCities.put(city4.getCity(),city4); //Dublin
 				 }
 				 
 				 city5=new City("Dublin","ger");
-				 if(!mapOfCities.containsKey(city5)) {
+				 if(!mapOfCities.containsKey(city5.getCity())) {
 		     	 city4.CityTerms();
 				 city4.CityLatLon();
+				 addDataToTableCities(city5.getCity(),city5.getCountry(),city5.getGeodestic_vector(0),city5.getGeodestic_vector(1),city5.getTerms_vector(0),city5.getTerms_vector(1),city5.getTerms_vector(2),city5.getTerms_vector(3),city5.getTerms_vector(4),city5.getTerms_vector(5),city5.getTerms_vector(6),city5.getTerms_vector(7),city5.getTerms_vector(8),city5.getTerms_vector(9));
 				 mapOfCities.put(city5.getCity(),city5); //den xanabazei tin idia poli mesa
 				 }
 
@@ -90,14 +105,17 @@ public class OpenData {
         } *///ektipwnei ta keys
 			
 		
-			//φτιαχνω arraylist με τις πόλεις
+			//φτιαχνω arraylist με τις πόλεις me metatropi apo map se arraylist
 			
-	    ArrayList<City> cities=new ArrayList<City>(); 
-	    cities.add(city1); //Rome
-	    cities.add(city2); //Corfu
-	    cities.add(city3); //Berlin
-	    cities.add(city4); //Dublin
-		
+	    ArrayList<City> cities=new ArrayList<City>(fromMapToArrayList(mapOfCities));
+	    
+	    /*epalitheusi
+	    for(int i=0;i<cities.size();i++) {
+	    	System.out.println(cities.get(i).getCity());
+	    	System.out.println(cities.get(i).getGeodestic_vector(0));
+	    };*/
+	    
+	    
 
 		JacksonFile json = new JacksonFile();
 		
@@ -211,10 +229,15 @@ public class OpenData {
 				}
 				
 				
-	    //sort travellers by timestamp
-	    travellersSortingByTimestamp(travellers);//επιστρεφει ενα Array ταξινομημενο σε αυξουσα σειρα 
+	    //sort travellers by timestamp auksousa seira
+				
+	   travellers= travellersSortingByTimestamp(travellers);//επιστρεφει ενα Array ταξινομημενο σε αυξουσα σειρα 
 		
-	    
+	  /* for(int i=0;i<travellers.size();i++) { //prwtos autos me to mikrotero timestamp
+		   System.out.println(travellers.get(i).getName());
+	   }; */
+	   
+	   
 		System.out.println("The winner of the free ticket is : "+freeticket(travellers).getName());//τυπώνω τον νικητή του εισητηρίου
 		 
 		

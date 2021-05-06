@@ -15,15 +15,27 @@ public class JacksonFile {
 
 	public void serializeTravellerData(ArrayList<Traveller> travellers) throws JsonGenerationException, JsonMappingException, IOException{
 		ObjectMapper mapper = new ObjectMapper();
-		mapper.enableDefaultTyping();
-		AllTravellers data = new AllTravellers();
-		data.setCollectionAllTravellers(travellers);
-		mapper.writeValue(new File("travellerData.json"), data);	
+		//mapper.enableDefaultTyping();
+		//AllTravellers data = new AllTravellers();
+		//data.setCollectionAllTravellers(travellers);
+		mapper.writeValue(new File("travellerData.json"), travellers);	
 	}
 	
 	
 	@SuppressWarnings("unchecked")
 	public ArrayList<Traveller> deserializeTravellerData() throws JsonParseException, JsonMappingException, IOException{
+		/*File f = new File("travellerData.json");
+		if(f.exists()) {
+		ObjectMapper mapper=new ObjectMapper();
+		ArrayList<Traveller> outputArrayListOfTravellers=mapper.readValue(f,ArrayList.class);
+		return outputArrayListOfTravellers;
+		
+		}else {
+			 return new ArrayList<Traveller>();
+		}*/
+	
+		
+		
 		File f = new File("travellerData.json");
 		if(f.exists()) {
 			ObjectMapper mapper = new ObjectMapper();

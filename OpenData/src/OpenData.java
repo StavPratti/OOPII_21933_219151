@@ -19,14 +19,14 @@ import totravel.MiddleTraveller;
 import totravel.Traveller;
 import static totravel.Traveller.*;
 import totravel.YoungTraveller;
-import totravel.JacksonFile;
+
 
 public class OpenData {
 	public static void main(String[] args) throws IOException, WikipediaNoArcticleException, InterruptedException, SQLException {
 		
 		BufferedReader stdin=new BufferedReader(new InputStreamReader(System.in));
 		
-		String cityname="ngriej";//βάζω λάθος όνομα πόλης ωστε να πεταχτει εξαίρεση και να βάλω ονομσ
+		String cityname="Rome";//βάζω λάθος όνομα πόλης ωστε να πεταχτει εξαίρεση και να βάλω ονομσ
 		                        //Rome
 		
        //map apo cities
@@ -119,14 +119,12 @@ public class OpenData {
 
 		JacksonFile json = new JacksonFile();
 		
-	    ArrayList<Traveller> testtravellers = new ArrayList<>(); //arraylist me tous travellers apo deserialization
+	    
 	    ArrayList<Traveller> travellers = new ArrayList<>(); //arraylist me tous travellers
-	    //το ιδιο μπορω να το κανω και με εναν middle ,elder
+	    
 
 		try {
-			
-			
-			
+		
 			travellers = json.deserializeTravellerData();
 
 		} catch (JsonParseException e) {
@@ -137,10 +135,11 @@ public class OpenData {
 			e.printStackTrace();
 		}
 	    
-	    //ArrayList<Traveller> travellers = new ArrayList<>(); //arraylist me tous travellers
+		
+	   
 	    //το ιδιο μπορω να το κανω και με εναν middle ,elder
 		YoungTraveller youngTravellerExample=new YoungTraveller("Athens","gr"); //φτιαχνω έναν νέο ταξιδιώτη
-		travellers.add(youngTravellerExample);//ton bazw kai sto collection
+		//travellers.add(youngTravellerExample);//ton bazw kai sto collection
 		
 		//καλώ την comparecities για να επιστρέψει την πιο ιδανική πόλη
 		City bestCity=youngTravellerExample.CompareCities(cities); 
@@ -157,7 +156,7 @@ public class OpenData {
 		youngTravellerExampleAgain.setRating_vector(new int[] {6,8,0,0,0,0,0,0,0,0}); //βαζω άλλα κρητήρια
 		City bestCityAgain =youngTravellerExampleAgain.CompareCities(cities); 
 		System.out.println("The best city for the traveller "+""+youngTravellerExampleAgain.getName()+ " "+ "is : "+bestCityAgain.getCity());//τυπώνω την πιο ιδανικη
-		travellers.add(youngTravellerExampleAgain);//τον προσθετω στο κολλεκτιον
+		//travellers.add(youngTravellerExampleAgain);//τον προσθετω στο κολλεκτιον
 		
 		
 		//tr.CurrentlyCityLatLon();
@@ -222,6 +221,11 @@ public class OpenData {
 		travellers.add(young3);
 		travellers.add(middle3);
 		
+		/*for(int i=0;i<travellers.size();i++) { 
+			
+			System.out.println(travellers.get(i).getName());
+		}*/
+		
 		//kanw ena comparecities gia olous wste na exoun kanie toulaxiston mia anazitisi gia na exoun timestamp
 				for(int i=0;i<travellers.size();i++) { //etsi oloi tha exoun kanei mia anazitisi
 					travellers.get(i).CompareCities(cities);
@@ -236,13 +240,11 @@ public class OpenData {
 	  /* for(int i=0;i<travellers.size();i++) { //prwtos autos me to mikrotero timestamp
 		   System.out.println(travellers.get(i).getName());
 	   }; */
-	   
+	  
 	   try {
 			
 			json.serializeTravellerData(travellers);
 			
-			
-
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {

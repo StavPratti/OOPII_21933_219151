@@ -1,6 +1,7 @@
 package totravel;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,13 +15,17 @@ import exceptions.WikipediaNoArcticleException;
 
 
 
- public abstract class Traveller implements Comparable<Traveller> {
+ public abstract class Traveller implements Comparable<Traveller> ,java.io.Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String city;
 	private String country;
 	private double[] currently_geodestic_vector=new double[2];
 	private int[] rating_vector=new int [10];
-	protected double similarity;
+
     private String name;
 
     private long timestamp;
@@ -32,7 +37,7 @@ import exceptions.WikipediaNoArcticleException;
 
 
 	public Traveller(String city,String country) {
-		this.similarity=0;
+		
 
 		this.name="Takis";//êñáôÜù êáé ôï ïíïìá ãéá íá ôõðþíù óôçí freeticket
 
@@ -238,14 +243,7 @@ public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
 		this.city = city;
 	}
 	
-		public double getSimilarity() {
-		return similarity;
-	}
-
-
-	public void setSimilarity(double similarity) {
-		this.similarity = similarity;
-	}
+	
 
 
 	public String getCountry() {

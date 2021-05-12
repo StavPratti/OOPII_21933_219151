@@ -78,6 +78,18 @@ public class City {
 		}
     }
 	
+
+	public void CityLatLon() throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
+		ObjectMapper mapper2=new ObjectMapper();
+		
+		String appid="c01b30fa264932378fe076eb38121dbc";
+		OpenWeatherMap weather_obj = mapper2.readValue(new URL("http://api.openweathermap.org/data/2.5/weather?q="+city+","+country+"&APPID="+appid+""), OpenWeatherMap.class);
+		geodestic_vector[0]=weather_obj.getCoord().getLat();
+		geodestic_vector[1]=weather_obj.getCoord().getLon();
+		//System.out.println(geodestic_vector[0]);
+		//System.out.println(geodestic_vector[1]);
+	}
+	
 	public static ArrayList<City> fromMapToArrayList(Map<String,City> mapOfCities){
 		 ArrayList<City> arrayListOfCities=new ArrayList<>(); 
 		/* for (Entry<String, City> entry : mapOfCities.entrySet()) {
@@ -102,18 +114,6 @@ public class City {
 			
 		return arrayListOfCities;
 	}
-	
-	public void CityLatLon() throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
-		ObjectMapper mapper2=new ObjectMapper();
-		
-		String appid="c01b30fa264932378fe076eb38121dbc";
-		OpenWeatherMap weather_obj = mapper2.readValue(new URL("http://api.openweathermap.org/data/2.5/weather?q="+city+","+country+"&APPID="+appid+""), OpenWeatherMap.class);
-		geodestic_vector[0]=weather_obj.getCoord().getLat();
-		geodestic_vector[1]=weather_obj.getCoord().getLon();
-		//System.out.println(geodestic_vector[0]);
-		//System.out.println(geodestic_vector[1]);
-	}
-	
 	
 	
 	public int getTerms_vector(int index) {

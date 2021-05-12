@@ -26,8 +26,7 @@ public class OpenData {
 		
 		BufferedReader stdin=new BufferedReader(new InputStreamReader(System.in));
 		
-		String cityname="Rome";//βάζω λάθος όνομα πόλης ωστε να πεταχτει εξαίρεση και να βάλω ονομσ
-		                        //Rome
+		
 		
        //map apo cities
 		Map<String, City> mapOfCities = new HashMap<String, City>();
@@ -46,6 +45,8 @@ public class OpenData {
 		City city4;
 		City city5;
 		
+		String cityname="nrgjry";//βάζω λάθος όνομα πόλης ωστε να πεταχτει εξαίρεση και να βάλω ονομσ
+		                        //Rome
 		while (true) {		
 			try {	
 				//elegxos wste na mhn ksanakalesw open data gia kathe  poli
@@ -109,13 +110,7 @@ public class OpenData {
 			
 	    ArrayList<City> cities=new ArrayList<City>(fromMapToArrayList(mapOfCities));
 	    
-	    
-	    /*for(int i=0;i<cities.size();i++) {
-	    	System.out.println(cities.get(i).getCity());
-	    	System.out.println(cities.get(i).getGeodestic_vector(0));
-	    };*/
-	    
-	    
+	  
 
 		JacksonFile json = new JacksonFile();
 		
@@ -166,10 +161,7 @@ public class OpenData {
 	
 
 		
-		
-		
-		
-		
+	
 		//free ticket
 		//φτιάχνω travellers
 		YoungTraveller young1=new YoungTraveller("Athens","gr");
@@ -221,11 +213,7 @@ public class OpenData {
 		travellers.add(young3);
 		travellers.add(middle3);
 		
-		/*for(int i=0;i<travellers.size();i++) { 
-			
-			System.out.println(travellers.get(i).getName());
-		}*/
-		
+	
 		//kanw ena comparecities gia olous wste na exoun kanie toulaxiston mia anazitisi gia na exoun timestamp
 				for(int i=0;i<travellers.size();i++) { //etsi oloi tha exoun kanei mia anazitisi
 					travellers.get(i).CompareCities(cities);

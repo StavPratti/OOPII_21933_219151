@@ -38,9 +38,6 @@ import exceptions.WikipediaNoArcticleException;
 
 	public Traveller(String city,String country) {
 		
-
-		this.name="Takis";//êñáôÜù êáé ôï ïíïìá ãéá íá ôõðþíù óôçí freeticket
-
 		this.name="Takis";//������ ��� �� ����� ��� �� ������ ���� freeticket
 		this.city=city;	
 		this.country=country;
@@ -51,63 +48,7 @@ import exceptions.WikipediaNoArcticleException;
 	
 	
 	
-	
 
-	//method that checks for doublecates and sorts travellers by their timestamp
-	public static ArrayList<Traveller> travellersSortingByTimestamp(ArrayList<Traveller> travellers)  {
-		ArrayList<Traveller> checkedAndSortedTravellers=new ArrayList<Traveller>();
-		
-		Collections.sort(travellers);
-		int timesThatGotIntoTheLoop=0;
-		checkedAndSortedTravellers.add(travellers.get(0));
-		for(int i=1;i<travellers.size();i++) {
-			if(!(checkedAndSortedTravellers.contains(travellers.get(i)))) {
-				checkedAndSortedTravellers.add(travellers.get(i));
-			}
-		}
-		//tipoma gia epalitheusi oti exoume swsto apotelesma
-		/*
-		for(int i=0;i<travellers.size();i++) {//��� �� �� �� ���� �������������� ����������
-			System.out.println(travellers.get(i).getName());
-			System.out.println(travellers.get(i).getTimestamp());
-		}
-		System.out.println("  ");
-		for(int i=0;i<checkedAndSortedTravellers.size();i++) {//��� �� �� �� ���� �������������� ����������
-			System.out.println(checkedAndSortedTravellers.get(i).getName());
-			System.out.println(checkedAndSortedTravellers.get(i).getTimestamp());
-		}*/
-		
-		return checkedAndSortedTravellers;
-	}
-	
-	 @Override
-	  public int compareTo(Traveller traveller){
-		 if(this.timestamp==traveller.timestamp)  
-			 return 0;  
-			 else if(this.timestamp>traveller.timestamp)  
-			 return 1;  
-			 else  
-			 return -1;  
-	  }
-	 
-	 @Override
-	    public boolean equals(Object traveller) {
-	  
-	        // If the object is compared with itself then return true  
-	        if (traveller == this) {
-	            return true;
-	        }
-	  
-	        // typecast o to Traveller so that we can compare them by name 
-	        Traveller c = (Traveller) traveller;
-	      
-	        if(c.name==this.name) {
-	        	return true;
-	        }else {
-	        	return false;
-	        }
-	    }
-	
 
 
 	/**Retrieves weather information, geotag (lan, lon) and a Wikipedia article for a given city.
@@ -217,7 +158,63 @@ public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
     }
     
 
+	
 
+	//method that checks for doublecates and sorts travellers by their timestamp
+	public static ArrayList<Traveller> travellersSortingByTimestamp(ArrayList<Traveller> travellers)  {
+		ArrayList<Traveller> checkedAndSortedTravellers=new ArrayList<Traveller>();
+		
+		Collections.sort(travellers);
+		int timesThatGotIntoTheLoop=0;
+		checkedAndSortedTravellers.add(travellers.get(0));
+		for(int i=1;i<travellers.size();i++) {
+			if(!(checkedAndSortedTravellers.contains(travellers.get(i)))) {
+				checkedAndSortedTravellers.add(travellers.get(i));
+			}
+		}
+		//tipoma gia epalitheusi oti exoume swsto apotelesma
+		/*
+		for(int i=0;i<travellers.size();i++) {//��� �� �� �� ���� �������������� ����������
+			System.out.println(travellers.get(i).getName());
+			System.out.println(travellers.get(i).getTimestamp());
+		}
+		System.out.println("  ");
+		for(int i=0;i<checkedAndSortedTravellers.size();i++) {//��� �� �� �� ���� �������������� ����������
+			System.out.println(checkedAndSortedTravellers.get(i).getName());
+			System.out.println(checkedAndSortedTravellers.get(i).getTimestamp());
+		}*/
+		
+		return checkedAndSortedTravellers;
+	}
+	
+	 @Override
+	  public int compareTo(Traveller traveller){
+		 if(this.timestamp==traveller.timestamp)  
+			 return 0;  
+			 else if(this.timestamp>traveller.timestamp)  
+			 return 1;  
+			 else  
+			 return -1;  
+	  }
+	 
+	 @Override
+	    public boolean equals(Object traveller) {
+	  
+	        // If the object is compared with itself then return true  
+	        if (traveller == this) {
+	            return true;
+	        }
+	  
+	        // typecast o to Traveller so that we can compare them by name 
+	        Traveller c = (Traveller) traveller;
+	      
+	        if(c.name==this.name) {
+	        	return true;
+	        }else {
+	        	return false;
+	        }
+	    }
+	
 
 
 	public void setRating_vector(int[] rating_vector) {

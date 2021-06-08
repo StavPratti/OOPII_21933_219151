@@ -212,11 +212,6 @@ public class TextVectorsListener {
 	   controlPanel.add(okButton);
 
 
-
-
-	   
-	   //controlPanel.add(textField);
-	  // controlPanel.add(okButton); 
 	   	   
 	    mainFrame.add(label0);
 	    mainFrame.add(controlPanel);

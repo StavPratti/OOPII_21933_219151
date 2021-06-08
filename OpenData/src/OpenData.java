@@ -7,9 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import static database.DataBaseConnection.*;
 import static totravel.City.*;
@@ -25,9 +22,7 @@ import totravel.MiddleTraveller;
 import totravel.Traveller;
 import static totravel.Traveller.*;
 import totravel.YoungTraveller;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+
 
 
 public class OpenData {

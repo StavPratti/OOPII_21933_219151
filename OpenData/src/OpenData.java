@@ -6,12 +6,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import static database.DataBaseConnection.*;
 import static totravel.City.*;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import exceptions.WikipediaNoArcticleException;
+import listeners.TextVectorsListener;
 import totravel.City;
 import totravel.ElderTraveller;
 import totravel.JacksonFile;
@@ -19,10 +25,18 @@ import totravel.MiddleTraveller;
 import totravel.Traveller;
 import static totravel.Traveller.*;
 import totravel.YoungTraveller;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 
 public class OpenData {
+	
+
+	
+	
 	public static void main(String[] args) throws IOException, WikipediaNoArcticleException, InterruptedException, SQLException {
+	
 		
 		BufferedReader stdin=new BufferedReader(new InputStreamReader(System.in));
 		
@@ -45,7 +59,7 @@ public class OpenData {
 		City city4;
 		City city5;
 		
-		String cityname="nrgjry";//βάζω λάθος όνομα πόλης ωστε να πεταχτει εξαίρεση και να βάλω ονομσ
+		String cityname="Rome";//βάζω λάθος όνομα πόλης ωστε να πεταχτει εξαίρεση και να βάλω ονομσ
 		                        //Rome
 		while (true) {		
 			try {	
@@ -56,7 +70,7 @@ public class OpenData {
 			     city1.CityLatLon();//δημιουργώ πινακα με τις συντεταγμενες
 			     addDataToTableCities(city1.getCity(),city1.getCountry(),city1.getGeodestic_vector(0),city1.getGeodestic_vector(1),city1.getTerms_vector(0),city1.getTerms_vector(1),city1.getTerms_vector(2),city1.getTerms_vector(3),city1.getTerms_vector(4),city1.getTerms_vector(5),city1.getTerms_vector(6),city1.getTerms_vector(7),city1.getTerms_vector(8),city1.getTerms_vector(9));
 			     mapOfCities.put(city1.getCity(),city1); //Rome
-			     System.out.println("This message will never be printed");
+			     //System.out.println("This message will never be printed");
 	             }
 	             
 	             city2=new City("Corfu","gr");//2η πόλη
@@ -85,8 +99,8 @@ public class OpenData {
 				 
 				 city5=new City("Dublin","ger");
 				 if(!mapOfCities.containsKey(city5.getCity())) {
-		     	 city4.CityTerms();
-				 city4.CityLatLon();
+		     	 city5.CityTerms();
+				 city5.CityLatLon();
 				 addDataToTableCities(city5.getCity(),city5.getCountry(),city5.getGeodestic_vector(0),city5.getGeodestic_vector(1),city5.getTerms_vector(0),city5.getTerms_vector(1),city5.getTerms_vector(2),city5.getTerms_vector(3),city5.getTerms_vector(4),city5.getTerms_vector(5),city5.getTerms_vector(6),city5.getTerms_vector(7),city5.getTerms_vector(8),city5.getTerms_vector(9));
 				 mapOfCities.put(city5.getCity(),city5); //den xanabazei tin idia poli mesa
 				 }
@@ -118,7 +132,7 @@ public class OpenData {
 	    ArrayList<Traveller> travellers = new ArrayList<>(); //arraylist me tous travellers
 	    
 
-		try {
+	/*	try {
 		
 			travellers = json.deserializeTravellerData();
 
@@ -129,19 +143,19 @@ public class OpenData {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	    
+	    */
 		
 	   
 	    //το ιδιο μπορω να το κανω και με εναν middle ,elder
 		YoungTraveller youngTravellerExample=new YoungTraveller("Athens","gr"); //φτιαχνω έναν νέο ταξιδιώτη
-		//travellers.add(youngTravellerExample);//ton bazw kai sto collection
+		travellers.add(youngTravellerExample);//ton bazw kai sto collection
 		
 		//καλώ την comparecities για να επιστρέψει την πιο ιδανική πόλη
 		City bestCity=youngTravellerExample.CompareCities(cities); 
 		System.out.println("The best city for the traveller "+""+youngTravellerExample.getName()+ " "+ "is : "+bestCity.getCity());//τυπώνω την πιο ιδανικη
 		
 		//καλώ την comparecities για να επιστρέψει τις πιο ιδανικες πόλεις
-		ArrayList<City> city =youngTravellerExample.CompareCities(cities, 4);
+		ArrayList<City> city =youngTravellerExample.CompareCities(cities, 3);
 		for(int i=0;i<city.size();i++) {
 			System.out.println("The"+" "+(i+2)+" "+"best city is:"+city.get(i).getCity()); //τυπώνω με την δεύτερη compare cities
 		}
@@ -150,8 +164,8 @@ public class OpenData {
 		YoungTraveller youngTravellerExampleAgain=new YoungTraveller("Athens","gr");
 		youngTravellerExampleAgain.setRating_vector(new int[] {6,8,0,0,0,0,0,0,0,0}); //βαζω άλλα κρητήρια
 		City bestCityAgain =youngTravellerExampleAgain.CompareCities(cities); 
-		System.out.println("The best city for the traveller "+""+youngTravellerExampleAgain.getName()+ " "+ "is : "+bestCityAgain.getCity());//τυπώνω την πιο ιδανικη
-		//travellers.add(youngTravellerExampleAgain);//τον προσθετω στο κολλεκτιον
+		//System.out.println("The best city for the traveller "+""+youngTravellerExampleAgain.getName()+ " "+ "is : "+bestCityAgain.getCity());//τυπώνω την πιο ιδανικη
+		travellers.add(youngTravellerExampleAgain);//τον προσθετω στο κολλεκτιον
 		
 		
 		//tr.CurrentlyCityLatLon();
@@ -165,8 +179,11 @@ public class OpenData {
 		//free ticket
 		//φτιάχνω travellers
 		YoungTraveller young1=new YoungTraveller("Athens","gr");
+		
 		MiddleTraveller middle1=new MiddleTraveller("Athens","gr");
+		
 		ElderTraveller elder1=new ElderTraveller("Athens","gr");
+		
 		YoungTraveller young2=new YoungTraveller("Athens","gr");
 		MiddleTraveller middle2=new MiddleTraveller("Berlin","de");
 		ElderTraveller elder2=new ElderTraveller("Athens","gr");
@@ -177,8 +194,11 @@ public class OpenData {
 		
 		//αλλάζω τα default vectors 
 		elder1.setRating_vector(new int[] {2,9,9,0,3,1,0,0,0,0});
+		
 		middle1.setRating_vector(new int[] {0,4,2,7,1,0,0,0,9,1});
+		
 		young2.setRating_vector(new int[] {2,1,5,6,7,8,9,7,7,7,});
+		
 		elder2.setRating_vector(new int[] {0,0,0,0,0,0,0,0,0,0});
 		middle2.setRating_vector(new int[] {1,0,0,0,0,0,0,0,0,0});
 		young3.setRating_vector(new int[] {9,9,9,9,9,9,9,9,9,9});
@@ -214,16 +234,16 @@ public class OpenData {
 		travellers.add(middle3);
 		
 	
-		//kanw ena comparecities gia olous wste na exoun kanie toulaxiston mia anazitisi gia na exoun timestamp
+		/*//kanw ena comparecities gia olous wste na exoun kanie toulaxiston mia anazitisi gia na exoun timestamp
 				for(int i=0;i<travellers.size();i++) { //etsi oloi tha exoun kanei mia anazitisi
 					travellers.get(i).CompareCities(cities);
-					TimeUnit.SECONDS.sleep(1);//ωστε να υπαρχει εμφανής διαφορα στα δευτερολεπτα 
-				}
+					TimeUnit.SECONDS.sleep(2);//ωστε να υπαρχει εμφανής διαφορα στα δευτερολεπτα 
+				}*/
 				
 				
 	    //sort travellers by timestamp auksousa seira
 				
-	   travellers= travellersSortingByTimestamp(travellers);//επιστρεφει ενα Array ταξινομημενο σε αυξουσα σειρα 
+	   //travellers= travellersSortingByTimestamp(travellers);//επιστρεφει ενα Array ταξινομημενο σε αυξουσα σειρα 
 		
 	  /* for(int i=0;i<travellers.size();i++) { //prwtos autos me to mikrotero timestamp
 		   System.out.println(travellers.get(i).getName());
@@ -243,6 +263,11 @@ public class OpenData {
 	   
 		System.out.println("The winner of the free ticket is : "+freeticket(travellers).getName());//τυπώνω τον νικητή του εισητηρίου
 		 
+		 TextVectorsListener  textVectorsListener = new TextVectorsListener(cities,travellers);  
+		 textVectorsListener.showKeyListenerDemo();
+
 		
 		}
-	}
+	
+
+}

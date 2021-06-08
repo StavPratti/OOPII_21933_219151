@@ -130,6 +130,7 @@ public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
         ArrayList<City> selectedCities= new ArrayList<>();    
 		for(int i = 1; i < integer; i++) { //βαζω σε νεο ArrayList χωρίς την πρωτη μεχρι τον ακεραιο
 		   selectedCities.add(cities.get(i));
+		  // System.out.println(cities.get(i).getCity());
 		}
 		return selectedCities;
 	}
@@ -165,7 +166,7 @@ public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
 		ArrayList<Traveller> checkedAndSortedTravellers=new ArrayList<Traveller>();
 		
 		Collections.sort(travellers);
-		int timesThatGotIntoTheLoop=0;
+		
 		checkedAndSortedTravellers.add(travellers.get(0));
 		for(int i=1;i<travellers.size();i++) {
 			if(!(checkedAndSortedTravellers.contains(travellers.get(i)))) {
@@ -173,8 +174,8 @@ public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
 			}
 		}
 		//tipoma gia epalitheusi oti exoume swsto apotelesma
-		/*
-		for(int i=0;i<travellers.size();i++) {//��� �� �� �� ���� �������������� ����������
+		
+		/*for(int i=0;i<travellers.size();i++) {//��� �� �� �� ���� �������������� ����������
 			System.out.println(travellers.get(i).getName());
 			System.out.println(travellers.get(i).getTimestamp());
 		}

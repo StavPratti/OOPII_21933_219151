@@ -118,7 +118,7 @@ public class TextVectorsListener {
 		    statusLabel2.setSize(350,100);
 		    
 		    
-	  // label0.setText("Please answer the following questions from 1 to 10"); 
+	  
 	   label1.setText("How much do you like going to the sea?");
 	   String [] items = { "0","1","2","3","4","5","6","7","8","9","10"};
 	   comboBox = new JComboBox(items);

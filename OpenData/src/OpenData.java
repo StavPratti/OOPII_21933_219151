@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 
@@ -25,22 +26,39 @@ import totravel.YoungTraveller;
 
 
 
-public class OpenData {
-	
+public class OpenData extends Thread{
+	public static ArrayList<Traveller> travellers = new ArrayList<>(); //arraylist me tous travellers
+    public static JacksonFile json = new JacksonFile();
+    
+	public void run() {
+		/*  
+		
+		try {
+		
+			travellers = json.deserializeTravellerData();
 
-	
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}*/
+
+	}
 	
 	public static void main(String[] args) throws IOException, WikipediaNoArcticleException, InterruptedException, SQLException {
 	
 		
 		BufferedReader stdin=new BufferedReader(new InputStreamReader(System.in));
 		
-		
+		(new OpenData()).start();
 		
        //map apo cities
 		Map<String, City> mapOfCities = new HashMap<String, City>();
 		makeConnection();//ftiaxnw mia sindesi me tin basi mou
 		mapOfCities=ReadData(mapOfCities);//gemizw to map moy me tis poleis pou exw idi mesa stin basi mou
+		
 		
 		
 		
@@ -92,9 +110,14 @@ public class OpenData {
 				 mapOfCities.put(city4.getCity(),city4); //Dublin
 				 }
 				 
-				 city5=new City("Dublin","ger");
+				 city5=new City("Tirana","al");
 				 if(!mapOfCities.containsKey(city5.getCity())) {
-		     	 city5.CityTerms();
+					 city5.CityTerms();
+					 city5.CityLatLon();
+					 System.out.println("hello");
+					
+		     	// city5.CityTerms();
+		     	 System.out.println(city5.getTerms_vector(0));
 				 city5.CityLatLon();
 				 addDataToTableCities(city5.getCity(),city5.getCountry(),city5.getGeodestic_vector(0),city5.getGeodestic_vector(1),city5.getTerms_vector(0),city5.getTerms_vector(1),city5.getTerms_vector(2),city5.getTerms_vector(3),city5.getTerms_vector(4),city5.getTerms_vector(5),city5.getTerms_vector(6),city5.getTerms_vector(7),city5.getTerms_vector(8),city5.getTerms_vector(9));
 				 mapOfCities.put(city5.getCity(),city5); //den xanabazei tin idia poli mesa
@@ -121,24 +144,9 @@ public class OpenData {
 	    
 	  
 
-		JacksonFile json = new JacksonFile();
 		
-	    
-	    ArrayList<Traveller> travellers = new ArrayList<>(); //arraylist me tous travellers
-	    
-
-	/*	try {
 		
-			travellers = json.deserializeTravellerData();
 
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	    */
 		
 	   
 	    //το ιδιο μπορω να το κανω και με εναν middle ,elder
@@ -218,6 +226,7 @@ public class OpenData {
 		
 		
 		
+		
 		travellers.add(elder1);
 		travellers.add(young1);
 		travellers.add(middle1);
@@ -228,14 +237,24 @@ public class OpenData {
 		travellers.add(young3);
 		travellers.add(middle3);
 		
+		young1.CompareCities(cities);
+		middle1.CompareCities(cities);
+		elder1.CompareCities(cities);
+		young2.CompareCities(cities);
+		middle2.CompareCities(cities);
+		elder2.CompareCities(cities);
+		young3.CompareCities(cities);
+		middle3.CompareCities(cities);
+		elder3.CompareCities(cities);
 	
-		/*//kanw ena comparecities gia olous wste na exoun kanie toulaxiston mia anazitisi gia na exoun timestamp
+	
+		//kanw ena comparecities gia olous wste na exoun kanie toulaxiston mia anazitisi gia na exoun timestamp
 				for(int i=0;i<travellers.size();i++) { //etsi oloi tha exoun kanei mia anazitisi
 					travellers.get(i).CompareCities(cities);
-					TimeUnit.SECONDS.sleep(2);//ωστε να υπαρχει εμφανής διαφορα στα δευτερολεπτα 
-				}*/
+					//TimeUnit.SECONDS.sleep(2);//ωστε να υπαρχει εμφανής διαφορα στα δευτερολεπτα 
+				}
 				
-				
+		
 	    //sort travellers by timestamp auksousa seira
 				
 	   //travellers= travellersSortingByTimestamp(travellers);//επιστρεφει ενα Array ταξινομημενο σε αυξουσα σειρα 
@@ -255,13 +274,16 @@ public class OpenData {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	   
+	  //
 		System.out.println("The winner of the free ticket is : "+freeticket(travellers).getName());//τυπώνω τον νικητή του εισητηρίου
 		 
 		 TextVectorsListener  textVectorsListener = new TextVectorsListener(cities,travellers);  
 		 textVectorsListener.showKeyListenerDemo();
-
-		
+		 countRank(travellers ,cities);
+		 
+		 Optional<City>  recommendedCity;
+         recommendedCity=filtering(travellers,youngTravellerExample,cities);
+		 System.out.println("The recommended city for the traveller"+" "+youngTravellerExample.getName()+" "+"using colaborating filtering is :"+recommendedCity.get().getCity());
 		}
 	
 

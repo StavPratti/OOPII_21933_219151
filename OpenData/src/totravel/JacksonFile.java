@@ -24,19 +24,19 @@ public class JacksonFile {
 	
 	@SuppressWarnings("unchecked")
 	public ArrayList<Traveller> deserializeTravellerData() throws JsonParseException, JsonMappingException, IOException{
-		/*File f = new File("travellerData.json");
+		File f = new File("travellerData.json");
 		if(f.exists()) {
 		ObjectMapper mapper=new ObjectMapper();
-		ArrayList<Traveller> outputArrayListOfTravellers=mapper.readValue(f,ArrayList.class);
+		ArrayList<Traveller> outputArrayListOfTravellers=mapper.readValue(new File("travellerData.json"),ArrayList.class);
 		return outputArrayListOfTravellers;
 		
 		}else {
 			 return new ArrayList<Traveller>();
-		}*/
+		}
 	
 		
 		
-		File f = new File("travellerData.json");
+		/*File f = new File("travellerData.json");
 		if(f.exists()) {
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.enableDefaultTyping();
@@ -45,7 +45,7 @@ public class JacksonFile {
 		}
 		else {
 			return new ArrayList<Traveller>();
-		}
+		}*/
 		
 	}
 

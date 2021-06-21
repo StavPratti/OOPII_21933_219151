@@ -5,8 +5,11 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
-
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -100,8 +103,39 @@ import exceptions.WikipediaNoArcticleException;
 		return bestCity;
 	}
 	
-
+public static Optional<City> filtering(ArrayList<Traveller> travellers,Traveller candidateTraveller,ArrayList<City> cities) {
+	int[] candidateTravellerCriteria=candidateTraveller.getCritiria();
 	
+	Optional<City>  recommendedCity=travellers.stream().map(i-> new City(i.getVisit().getCity(),innerDot(i.getCritiria(),candidateTravellerCriteria))).max(Comparator.comparingInt(City::getRank));
+	return recommendedCity;
+			
+
+}
+
+
+public static void countRank(ArrayList<Traveller> travellers ,ArrayList<City> cities) {
+    int count=0;
+    for(int j=0;j<cities.size();j++) {
+    	String search = cities.get(j).getCity();
+    	for(int i=0;i<travellers.size();i++) {
+    		if(travellers.get(i).getCity().equals(search))
+            {
+                count++;
+            }
+    	}
+    	cities.get(j).setRank(count);
+    }
+}
+
+
+private static int innerDot(int[] currentTraveller, int[] candidateTraveller) {
+	int sum=0;
+	for (int i=0; i<currentTraveller.length;i++)
+		sum+=currentTraveller[i]*candidateTraveller[i];
+	return sum;
+		
+}
+
 public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
 		
 		Date date =new Date();
@@ -229,6 +263,10 @@ public ArrayList<City> CompareCities(ArrayList<City> cities, int integer) {
   		return rating_vector[index];
   	}
 
+    public int[] getCritiria() {
+    	return rating_vector;
+    }
+    
 	public void setCurGeodestic_vector(double[] currently_geodestic_vector) {
 		this.currently_geodestic_vector = currently_geodestic_vector;
 	}

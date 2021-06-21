@@ -33,8 +33,29 @@ public class City {
 	private int[] terms_vector=new int[10];
 	private double[] geodestic_vector=new double[2];
 	private String country;
+	private int rank;
+	
 
 
+
+	public int getRank() {
+		return rank;
+	}
+
+
+
+
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+
+
+	public City(String city,int rank) {
+		this.city=city;	
+		this.rank=rank;
+		
+	}
 
 
 	public City(String city,String country) {
@@ -42,6 +63,10 @@ public class City {
 		this.country=country;
 		
 	}
+	
+	
+		
+		
 	
 	/**Retrieves weather information, geotag (lan, lon) and a Wikipedia article for a given city.
 	* @param city The Wikipedia article and OpenWeatherMap city. 
@@ -60,12 +85,12 @@ public class City {
 	 
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
-		WebResource service = client.resource(UriBuilder.fromUri("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles="+city+"&format=json&formatversion=2").build());      
+		WebResource service = client.resource(UriBuilder.fromUri("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles="+this.city+"&format=json&formatversion=2").build());      
 		String[] terms_vector_strings=new String[]{"sea","walls","ancient","mountain","cafe","museum","squeare","restaurant","views","forest"};
 		ObjectMapper mapper = new ObjectMapper(); 
 		String json= service.accept(MediaType.APPLICATION_JSON).get(String.class); 
 		if (json.contains("pageid")) {
-			MediaWiki mediaWiki_obj =  mapper.readValue(new URL("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles="+city+"&format=json&formatversion=2"),MediaWiki.class);
+			MediaWiki mediaWiki_obj =  mapper.readValue(new URL("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles="+this.city+"&format=json&formatversion=2"),MediaWiki.class);
 			for(int i=0;i<terms_vector_strings.length;i++) {
 				int count=countCriterionfCity(mediaWiki_obj.getQuery().getPages().get(0).getExtract(),terms_vector_strings[i]);
 				terms_vector[i]=count;
@@ -148,6 +173,8 @@ public class City {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
+	
 }
 	
 	
